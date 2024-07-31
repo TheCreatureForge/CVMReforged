@@ -1,0 +1,19 @@
+{
+    "name": "CVM2Reforge",
+    "version": "0.0.0",
+    "files": [
+        "images.g.jres",
+        "images.g.ts",
+        "main.ts",
+        "CharacterMake.ts",
+        "character.ts",
+        "importFiles.ts"
+    ],
+    "supportedTargets": [
+        "arcade"
+    ],
+    "dependencies": {
+        "device": "*"
+    },
+    "testDependencies": {}
+}
