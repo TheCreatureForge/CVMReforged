@@ -1,2 +1,3 @@
-///<reference path="./character.ts" />
+///<reference path="./characters.ts" />
 ///<reference path="./CharacterMake.ts" />
+///<reference path="./characterSelect.ts" />

@@ -4,16 +4,21 @@
     "files": [
         "images.g.jres",
         "images.g.ts",
+        "tilemap.g.jres",
+        "tilemap.g.ts",
         "main.ts",
         "CharacterMake.ts",
-        "character.ts",
-        "importFiles.ts"
+        "characters.ts",
+        "importFiles.ts",
+        "characterSelect.ts"
     ],
     "supportedTargets": [
         "arcade"
     ],
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
+        "custom-keybind-extension": "github:brohann3214/custom-keybind-extension#master"
     },
     "testDependencies": {}
 }
