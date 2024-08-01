@@ -1,18 +1,11 @@
 namespace charSelect {
-    export function setupOverlapTileHandler(tile: Image, image: Image) {
-        scene.onOverlapTile(SpriteKind.Player, tile, function (sprite) {
-            
-            displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), image);
-            console.log(sprites.readDataNumber(sprite, "PlayerNumber"));
-        });
-    }
 
-    function displayCharSelectImg(playerNum: number, image: Image) {
+    export function displayCharSelectImg(playerNum: number, image: Image) {
         if (playerNum == 1) {
             player1.setImage(image);
         } else if (playerNum == 2) {
-            image.flipX();
             player2.setImage(image);
+            player2.image.flipX();
         }
     }
     

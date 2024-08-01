@@ -1,4 +1,3 @@
-
 namespace CMakeNS {
     
     export class selectChar {
