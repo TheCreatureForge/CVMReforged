@@ -58,11 +58,14 @@ player2.scale = 2;
 
 tiles.setCurrentTilemap(tilemap`CharSelectTM`)
 
-
-// Display hovers for characters
-charSelect.setupOverlapTileHandler(assets.tile`CreatureTile`, assets.image`CreatureSelectImg`);
-charSelect.setupOverlapTileHandler(assets.tile`MinionTile`, assets.image`MinionSelectImg`);
-charSelect.setupOverlapTileHandler(assets.tile`RainCatcherTile`, assets.image`RCSelectImg`);
-charSelect.setupOverlapTileHandler(assets.tile`AmongUsTile`, assets.image`AmongUsSelectImg`);
-charSelect.setupOverlapTileHandler(assets.tile`CodeyTile`, assets.image`CodeySelectImg`);
-charSelect.setupOverlapTileHandler(assets.tile`HankTile`, assets.image`HankSelectImg`);
+//For charatcer select, Check if cursor hovers character and displays it
+//Creature
+scene.onOverlapTile(SpriteKind.Player, assets.tile`CreatureTile`, function (sprite){ charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`CreatureSelectImg` )})
+//Minion
+scene.onOverlapTile(SpriteKind.Player, assets.tile`MinionTile`, function (sprite){ charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`MinionSelectImg` )})
+//Rain Catcher 
+scene.onOverlapTile(SpriteKind.Player, assets.tile`RainCatcherTile`, function (sprite) { charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`RCSelectImg` )})
+//Among Us
+scene.onOverlapTile(SpriteKind.Player, assets.tile`AmongUsTile`, function (sprite) { charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`AmongUsSelectImg` )})
+//Codey
+scene.onOverlapTile(SpriteKind.Player, assets.tile`AmongUsTile`, function (sprite) { charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`AmongUsSelectImg` )})
