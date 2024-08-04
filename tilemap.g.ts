@@ -59,25 +59,6 @@ namespace myImages {
 . . 7 7 . . . . . . 7 7 . . . . 
 . . 7 7 . . . . . . 7 7 . . . . 
 `;
-            case "myTiles.tile4":
-            case "AmongUsTile":return img`
-. . . . 7 7 7 7 . 7 7 . . . . . 
-. . . 7 7 6 6 7 7 7 6 7 . . . . 
-. . . . . f f f f f f f . . . . 
-. . . f f f 2 2 2 2 2 f . . . . 
-. . . f 2 2 2 2 2 f f f f f . . 
-. f f f 2 2 2 2 2 f 6 9 1 f f . 
-. f 2 f 2 2 2 2 2 f 6 6 9 9 f . 
-. f 2 f 2 2 2 2 2 f b 6 6 6 f . 
-. f 2 f 2 2 2 2 2 f f f f f f . 
-. f 2 f 2 2 2 2 2 2 2 2 f . . . 
-. f 2 f 2 2 2 2 2 2 2 2 f . . . 
-. f f f 2 2 2 2 2 2 2 2 f . . . 
-. . . f 2 2 f f f 2 2 2 f . . . 
-. . . f 2 2 f . . f 2 2 f . . . 
-. . . f 2 2 f . . f 2 2 f . . . 
-. . . f f f f . . f f f f . . . 
-`;
             case "myTiles.tile1":
             case "CreatureTile":return img`
 . . . . . . . . . . . . . . . . 
@@ -211,6 +192,25 @@ f 1 1 f f d f d f d f . f f . .
 . . 2 . 2 . 2 . 2 . . . . . . . 
 . . . . 2 . . . 2 . . . . . . . 
 `;
+            case "myTiles.tile4":
+            case "AmongUsTile":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . 7 7 7 . 7 7 . . . . . 
+. . . . 7 7 6 6 7 7 6 7 . . . . 
+. . . . . f f f f f f f . . . . 
+. . . . f f 2 2 2 2 2 f f . . . 
+. . . . f 2 2 2 2 f f f f f . . 
+. . . f f 2 2 2 2 f 6 9 1 f f . 
+. . f 2 f 2 2 2 2 f 6 6 9 9 f . 
+. . f 2 f 2 2 2 2 f b 6 6 6 f . 
+. . f 2 f 2 2 2 2 f f f f f f . 
+. . f 2 f 2 2 2 2 2 2 2 f . . . 
+. . f 2 f 2 2 2 2 2 2 2 f . . . 
+. . . f f 2 2 f f f 2 2 f . . . 
+. . . . f 2 2 f . f 2 2 f . . . 
+. . . . f 2 2 f . f 2 2 f . . . 
+. . . . f f f f . f f f f . . . 
+`;
         }
         return null;
     })
@@ -241,8 +241,6 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile3 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile4 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile1 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile5 = image.ofBuffer(hex``);
@@ -256,6 +254,8 @@ namespace myTiles {
     export const tile9 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile11 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile4 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -268,7 +268,7 @@ namespace myTiles {
 2 2 2 2 2 2 2 2 2 2 
 . . . . . . . . . . 
 . . . . . . . . . . 
-2 2 2 2 2 2 2 2 2 2 
+. . . . . . . . . . 
 `, [myTiles.transparency16,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,myTiles.tile9,myTiles.tile11], TileScale.Sixteen);
         }
         return null;
@@ -281,8 +281,6 @@ namespace myTiles {
             case "tile2":return myTiles.tile2;
             case "RainCatcherTile":
             case "tile3":return myTiles.tile3;
-            case "AmongUsTile":
-            case "tile4":return myTiles.tile4;
             case "CreatureTile":
             case "tile1":return myTiles.tile1;
             case "CodeyTile":
@@ -297,6 +295,8 @@ namespace myTiles {
             case "tile9":return myTiles.tile9;
             case "DarkCreatureTile":
             case "tile11":return myTiles.tile11;
+            case "AmongUsTile":
+            case "tile4":return myTiles.tile4;
         }
         return null;
     })

@@ -18,7 +18,17 @@
     "dependencies": {
         "device": "*",
         "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
-        "custom-keybind-extension": "github:brohann3214/custom-keybind-extension#master"
+        "custom-keybind-extension": "github:brohann3214/custom-keybind-extension#master",
+        "arcade-timers": "github:microsoft/arcade-timers#v1.1.0",
+        "Color Fading": "github:jwunderl/pxt-color#v0.2.3",
+        "arcade-background-scroll": "github:microsoft/arcade-background-scroll#v0.1.2"
+    },
+    "targetVersions": {
+        "branch": "v1.12.55",
+        "tag": "v1.12.55",
+        "commits": "https://github.com/microsoft/pxt-arcade/commits/0b8917880a46a30b0f35218153e52853fa47e114",
+        "target": "1.12.55",
+        "pxt": "8.5.66"
     },
     "testDependencies": {}
 }

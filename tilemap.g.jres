@@ -25,15 +25,6 @@
         "tilemapTile": true,
         "displayName": "RainCatcherTile"
     },
-    "myTiles.tile4": {
-        "id": "myTiles.tile4",
-        "data": "hwQQABAAAAAAAAAAAAAAAAAA8P///wAAAADwIiLyAABw8P///////3fwIiIiIiLyZ/8iIiIiIvJnLyIiIiL//3cvIiIiIg8AcC8iIiIiDwB3L///LyLy/2cvb7YvIiLycP+fZi8iIvIAAB9p/////wAA/2kPAAAAAADw/w8AAAAAAAAAAAAAAA==",
-        "dataEncoding": "base64",
-        "namespace": "myTiles.",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "AmongUsTile"
-    },
     "myTiles.tile1": {
         "id": "myTiles.tile1",
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAiAgAAAAAAIiBAAAAAACAEYGIAAAAAIgRgQAAAAAAGBGBCAAAAAAYEYEAAACIiIgRgYgAgBERERiIAACAERERiAgAAICBERGBAAAAgBGBGIEAAACAEQiAgQAAAACIAAAIAAAAAAAAAAAAAA==",
@@ -97,9 +88,18 @@
         "tilemapTile": true,
         "displayName": "DarkCreatureTile"
     },
+    "myTiles.tile4": {
+        "id": "myTiles.tile4",
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8P//AAAAAAAvIiIPAAAH////////cPcvIiIiIvJw9iIiIiIi8nD2IiIiIv//APciIiIiDwBw9/L//yL//3D28mb7IiLyAPf/afYiIvIAAP+R9v///wAA8J/2AAAAAAAA//8AAAAAAAAAAAAAAA==",
+        "dataEncoding": "base64",
+        "namespace": "myTiles.",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "AmongUsTile"
+    },
     "CharSelectTM1": {
         "id": "CharSelectTM1",
-        "data": "MTAwYTAwMDgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMDIwMzA0MDUwNjA3MDgwMDAwMGEwMDAwMDAwMDAwMDAwOTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMjAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMg==",
+        "data": "MTAwYTAwMDgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMDIwMzA0MDUwNjA3MDgwMDAwMGEwMDAwMDAwMDAwMDAwOTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
         "mimeType": "application/mkcd-tilemap",

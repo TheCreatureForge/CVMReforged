@@ -1,20 +1,34 @@
 namespace CMakeNS {
     
     export class selectChar {
-        private hp: number;
-        private image: Image;
+        public hp: number;
+        public speed: number;
+        public jumpCount: number;
+        public characterDamage: number;
+        public characterGravity: number;
+        public characterJumpSpeed: number;
+        public image: Image;
+        public deathAnim: Image[];
+        public winAnim: Image[];
         
-        constructor(hp: number, image: Image) {
+        
+        constructor(hp: number, speed: number, jumpCount: number, characterDamage: number, characterGravity: number, characterJumpSpeed: number, image: Image ) {
             this.hp = hp;
+            this.speed = speed;
+            this.jumpCount = jumpCount;
+            this.characterDamage = characterDamage;
+            this.characterGravity = characterGravity;
+            this.characterJumpSpeed = characterJumpSpeed;
             this.image = image;
+            //this.deathAnim = image;
+            //this.winAnim = image;
         }
 
-        public getSprite(): Image { 
-            return this.image;
-        } // Returns sprite name so we can set player sprite
+       
     }
 
-    // We can change sprite name
-    // 1 = Hank
-    // 2 = Rain Catcher
+   
 }
+
+
+
