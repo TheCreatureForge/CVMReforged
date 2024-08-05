@@ -8,6 +8,7 @@ namespace CMakeNS {
         public characterGravity: number;
         public characterJumpSpeed: number;
         public image: Image;
+        
         public deathAnim: Image[];
         public winAnim: Image[];
         

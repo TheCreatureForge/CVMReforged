@@ -156,11 +156,102 @@ let player2 = sprites.create(assets.image`NullImage`, SpriteKind.Player2Fighter)
 player2.setPosition(100, 30);
 player2.scale = 2;
 
-// let creature = characters.characterList.Creature;
+let creature = characters.characterList.Creature;
+let minion = characters.characterList.Minion;
+let raincatcher = characters.characterList.Raincatcher;
+let crewmate = characters.characterList.Crewmate;
+let codey = characters.characterList.Codey;
+let hank = characters.characterList.Hank;
+let barth = characters.characterList.Barth;
+let dot = characters.characterList.Dot;
+let darkCreature = characters.characterList.DarkCreature;
 
 // player1.setImage(creature.getSprite());
 //sprites.setDataNumber(creature.hp)
 
+function ApplyCharStats(sprite: Sprite, char:CMakeNS.selectChar, direction: string) {
+    sprites.setDataNumber(sprite, "hp", char.hp);
+    sprites.setDataNumber(sprite, "speed", char.speed);
+    sprites.setDataNumber(sprite, "jumpCount", char.jumpCount);
+    sprites.setDataNumber(sprite, "characterDamage", char.characterDamage);
+    sprite.ay = char.characterGravity;
+    sprites.setDataNumber(sprite, "characterJumpSpeed", char.characterJumpSpeed);
+    sprites.setDataString(sprite,"direction", direction)
+
+    sprite.setImage(char.image);
+}
+
+function SetUpFighters() {
+    player1.scale = 1;
+    player2.scale = 1;
+
+    switch (player1Character) {
+        case "Creature":
+            ApplyCharStats(player1, creature, "Right");
+            break;
+        case "Minion": 
+            ApplyCharStats(player1, minion, "Right");
+            break;
+        case "RainCatcher": 
+            ApplyCharStats(player1, raincatcher, "Right");
+            break;
+        case "AmongUs": 
+            ApplyCharStats(player1, crewmate, "Right");
+            break;
+        case "Codey": 
+            ApplyCharStats(player1, codey, "Right");
+            break;
+        case "Hank": 
+            ApplyCharStats(player1, hank, "Right");
+            break;
+        case "Barth": 
+            ApplyCharStats(player1, barth, "Right");
+            break;
+        case "Dot": 
+            ApplyCharStats(player1, dot, "Right");
+            break;
+        case "DarkCreature": 
+            ApplyCharStats(player1, darkCreature, "Right");
+            break;
+        default:
+            ApplyCharStats(player1, creature, "Right");
+    }
+    
+    switch (player2Character) {
+        case "Creature":
+            ApplyCharStats(player2, creature, "Left");
+            break;
+        case "Minion": 
+            ApplyCharStats(player2, minion, "Left");
+            break;
+        case "RainCatcher": 
+            ApplyCharStats(player2, raincatcher, "Left");
+            break;
+        case "AmongUs": 
+            ApplyCharStats(player2, crewmate, "Left");
+            break;
+        case "Codey": 
+            ApplyCharStats(player2, codey, "Left");
+            break;
+        case "Hank": 
+            ApplyCharStats(player2, hank, "Left");
+            break;
+        case "Barth": 
+            ApplyCharStats(player2, barth, "Left");
+            break;
+        case "Dot": 
+            ApplyCharStats(player2, dot, "Left");
+            break;
+        case "DarkCreature": 
+            ApplyCharStats(player2, darkCreature, "Left");
+            break;
+        default:
+            ApplyCharStats(player2, creature, "Left");
+        }
+        
+        player2.image.flipX()
+}
+    
 
 //These are the drop down titles 
 let Title1 = sprites.create(assets.image`NullImage`, SpriteKind.Prop);
@@ -185,8 +276,29 @@ game.showLongText("", DialogLayout.Bottom)
 scene.setBackgroundImage(assets.image`NullImage`)
 info.startCountdown(30);
 
+game.onUpdate(function () {
+    if (stateOfGame == "Fight") {
+        player1.say(sprites.readDataString(player1, "direction"));
+        player2.say(sprites.readDataString(player2, "direction"));
 
-//creates cursor after  
+
+
+        if (player1.x < player2.x && sprites.readDataString(player1, "direction") != "Right") {
+            player1.image.flipX()
+            player2.image.flipX()
+            sprites.setDataString(player1, "direction", "Right")
+            sprites.setDataString(player2, "direction", "Left")
+
+        }
+
+        if (player1.x > player2.x && sprites.readDataString(player1, "direction") != "Left") {
+            player1.image.flipX()
+            player2.image.flipX()
+            sprites.setDataString(player1, "direction", "Left")
+            sprites.setDataString(player2, "direction", "Right")
+        }
+    }
+})
 
 //Character select songs
 if (Math.percentChance(70)) {
@@ -198,6 +310,7 @@ if (Math.percentChance(70)) {
 tiles.setCurrentTilemap(tilemap`CharSelectTM`)
 
 
+//creates cursor after  
 let player1Cursor = charSelect.createCursor1();
 let player2Cursor = charSelect.createCursor2();
 
@@ -226,6 +339,14 @@ function playSong(songName: string) {
         case "CVMStart":
             music.play(music.createSong(assets.song`CVMStart`), music.PlaybackMode.InBackground);
             break;
+        case "MetalCrusher":
+            timer.background(function () {
+            music.setVolume(25);
+            music.play(music.createSong(assets.song`MetalCrusher1`), music.PlaybackMode.UntilDone);
+            music.setVolume(25);
+            music.play(music.createSong(assets.song`MetalCrusher2`), music.PlaybackMode.LoopingInBackground);
+                
+            })
            
     }
     music.setVolume(75);

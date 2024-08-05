@@ -64,14 +64,15 @@ namespace charSelect {
     function startGame() {
         //checks if both players lock in a charcter
         if (sprites.readDataBoolean(player1Cursor, "player1Ready") == true && sprites.readDataBoolean(player2Cursor, "player2Ready") == true && stateOfGame == "Select") {
-            stateOfGame = "Fight"
+            //stateOfGame = "Fight"
             info.stopCountdown();
             //Versus Card
             timer.after(1000, function () {
                 tiles.setCurrentTilemap(tilemap`NULL`);
                 scene.setBackgroundImage(assets.image`VsBackground`)
                 Title1.setPosition(40, 9);
-                Title2.setPosition(120, 9)
+                Title2.setPosition(120, 9);
+
                 //motiff for V.S Screen
                 if (Math.percentChance(20)) {
                     playSong("MBStart");
@@ -89,21 +90,34 @@ namespace charSelect {
                 timer.after(4000, function () {
                     scene.setBackgroundImage(assets.image`Arena1Background`);
     
-                    player1.destroy();
-                    player2.destroy();
+                    // player1.destroy();
+                    // player2.destroy();
                     Title1.destroy();
                     Title2.destroy();
                     color.startFade(color.Black, color.originalPalette, 4000)
                     timer.after(3000, function () {
-                        playSong("Cythia");
+                        if (Math.percentChance(50)) {
+                            playSong("Cythia");
+                        } else {
+                            playSong("MetalCrusher");
+                        }
                         scroller.scrollBackgroundWithSpeed(-350,0)
                         effects.blizzard.startScreenEffect(4000)
-                       
+                        
                         timer.after(753, function () {
-                            scroller.scrollBackgroundWithSpeed(0,0)
-                            
+                            stateOfGame = "Fight"
+                            scroller.scrollBackgroundWithSpeed(0, 0)
+                            tiles.setCurrentTilemap(assets.tilemap`Floor`);
+                            SetUpFighters()
+
+
+                            controller.moveSprite(player1, sprites.readDataNumber(player1, "speed"),0)
+                            controller.player2.moveSprite(player2, sprites.readDataNumber(player2, "speed"),0)
                         })
                     })
+
+
+
                 })
             })
         }
@@ -224,6 +238,24 @@ namespace charSelect {
     
        
     })
+
+
+
+    controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+        if (stateOfGame == "Fight" && sprites.readDataNumber(player1, "characterJumpSpeed") ) {
+            player1.vy = sprites.readDataNumber(player1, "characterJumpSpeed");
+            //num  
+        }
+       
+    })
+
+    controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+        if (stateOfGame == "Fight") {
+            player2.vy = sprites.readDataNumber(player2, "characterJumpSpeed"); 
+        }
+       
+    })    
+
 
 
 

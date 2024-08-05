@@ -5,13 +5,13 @@ namespace characters {
 
     // hp, speed, jumpCount, characterDamage, characterGravity, characterJumpSpeed, image,          |||||| deathAnim, winAnim
     export const characterList = {
-        Creature: new CMakeNS.selectChar(200, 60, 2, -7, 350, -160, assets.image`TestCharacter`),
+        Creature: new CMakeNS.selectChar(200, 60, 2, -7, 350, -160, assets.image`CreatureModel`),
 
-        Minion: new CMakeNS.selectChar(200, 55, 2, -7, 350, -170, assets.image`TestCharacter`),
+        Minion: new CMakeNS.selectChar(200, 55, 2, -7, 350, -170, assets.image`MinionModel`),
 
-        Raincatcher: new CMakeNS.selectChar(250, 45, 1, -2, 375, -180, assets.image`TestCharacter`),
+        Raincatcher: new CMakeNS.selectChar(250, 45, 1, -2, 375, -180, assets.image`RaincatcherModel`),
 
-        Crewmate: new CMakeNS.selectChar(200, 10, 2, -7, 275, -135, assets.image`TestCharacter`),
+        Crewmate: new CMakeNS.selectChar(200, 10, 2, -7, 275, -135, assets.image`CrewmateModel`),
 
         Codey: new CMakeNS.selectChar(180, 10, 3, -6, 350, -135, assets.image`TestCharacter`),
 
