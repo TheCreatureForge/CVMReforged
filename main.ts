@@ -5,29 +5,25 @@ namespace SpriteKind{
     export const Prop = SpriteKind.create();
 }
 //sets up unique key mappings
-try {
-    Keybinds.setSimulatorKeymap(
-        Keybinds.PlayerNumber.ONE, // PlayerNumber 1
-        Keybinds.CustomKey.W,      // buttonUp
-        Keybinds.CustomKey.S,      // buttonDown
-        Keybinds.CustomKey.A,      // buttonLeft
-        Keybinds.CustomKey.D,      // buttonRight
-        Keybinds.CustomKey.C,      // buttonA
-        Keybinds.CustomKey.V       // buttonB
-    );
+// Keybinds.setSimulatorKeymap(
+//     Keybinds.PlayerNumber.ONE, 
+//     Keybinds.CustomKey.W,      
+//     Keybinds.CustomKey.S,      
+//     Keybinds.CustomKey.A,      
+//     Keybinds.CustomKey.D,      
+//     Keybinds.CustomKey.C,      
+//     Keybinds.CustomKey.V       
+// );
 
-    Keybinds.setSimulatorKeymap(
-        Keybinds.PlayerNumber.TWO, // PlayerNumber 2
-        Keybinds.CustomKey.UP,     // buttonUp
-        Keybinds.CustomKey.DOWN,   // buttonDown
-        Keybinds.CustomKey.LEFT,   // buttonLeft
-        Keybinds.CustomKey.RIGHT,  // buttonRight
-        Keybinds.CustomKey.O,      // buttonA
-        Keybinds.CustomKey.P       // buttonB
-    );
-} catch (error) {
-    console.error('This error is just here bc the tilemap dependancy is not downloaded');
-}
+// Keybinds.setSimulatorKeymap(
+//     Keybinds.PlayerNumber.TWO, 
+//     Keybinds.CustomKey.UP,     
+//     Keybinds.CustomKey.DOWN,   
+//     Keybinds.CustomKey.LEFT,   
+//     Keybinds.CustomKey.RIGHT,  
+//     Keybinds.CustomKey.O,      
+//     Keybinds.CustomKey.P       
+// );
 
 
 // Does the overlap on a per-player basis. If wanting to extend to more than two, easily done
