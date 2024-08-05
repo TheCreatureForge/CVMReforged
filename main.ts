@@ -5,6 +5,10 @@ namespace SpriteKind{
     export const Prop = SpriteKind.create();
 }
 //sets up unique key mappings
+// For some reason in BUILD on github these have errors regarding custom-keybind-extension, with pxt_modules/game/keymap.ts
+// UN COMMENT THESE ON YOUR OWN BUILD
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 // Keybinds.setSimulatorKeymap(
 //     Keybinds.PlayerNumber.ONE, 
 //     Keybinds.CustomKey.W,      
@@ -24,6 +28,7 @@ namespace SpriteKind{
 //     Keybinds.CustomKey.O,      
 //     Keybinds.CustomKey.P       
 // );
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 // Does the overlap on a per-player basis. If wanting to extend to more than two, easily done
