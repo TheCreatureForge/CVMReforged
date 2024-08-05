@@ -11,7 +11,8 @@
         "characters.ts",
         "importFiles.ts",
         "characterSelect.ts",
-        "overlapHandler.ts"
+        "overlapHandler.ts",
+        "custom-keybind-extension.ts"
     ],
     "supportedTargets": [
         "arcade"
