@@ -10,7 +10,8 @@
         "CharacterMake.ts",
         "characters.ts",
         "importFiles.ts",
-        "characterSelect.ts"
+        "characterSelect.ts",
+        "overlapHandler.ts"
     ],
     "supportedTargets": [
         "arcade"
