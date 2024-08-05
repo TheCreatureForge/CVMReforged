@@ -5,131 +5,35 @@ namespace SpriteKind{
     export const Prop = SpriteKind.create();
 }
 //sets up unique key mappings
-Keybinds.setSimulatorKeymap(
-    Keybinds.PlayerNumber.ONE,
-    Keybinds.CustomKey.W,
-    Keybinds.CustomKey.S,
-    Keybinds.CustomKey.A,
-    Keybinds.CustomKey.D,
-    Keybinds.CustomKey.C,
-    Keybinds.CustomKey.V
-)
+// For some reason in BUILD on github these have errors regarding custom-keybind-extension, with pxt_modules/game/keymap.ts
+// UN COMMENT THESE ON YOUR OWN BUILD
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-Keybinds.setSimulatorKeymap(
-    Keybinds.PlayerNumber.TWO,
-    Keybinds.CustomKey.UP,
-    Keybinds.CustomKey.DOWN,
-    Keybinds.CustomKey.LEFT,
-    Keybinds.CustomKey.RIGHT,
-    Keybinds.CustomKey.O,
-    Keybinds.CustomKey.P
-)
+// Keybinds.setSimulatorKeymap(
+//     Keybinds.PlayerNumber.ONE, 
+//     Keybinds.CustomKey.W,      
+//     Keybinds.CustomKey.S,      
+//     Keybinds.CustomKey.A,      
+//     Keybinds.CustomKey.D,      
+//     Keybinds.CustomKey.C,      
+//     Keybinds.CustomKey.V       
+// );
 
-
-//For charatcer select, Check if cursor hovers character,displays spash art, and change their character 
-//TODO Port over to characterSelect.ts and optimzie because right now there 2 of every overlap each player, convert into one 
-//Creature
-scene.onOverlapTile(SpriteKind.Player1Fighter, assets.tile`CreatureTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`CreatureSelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Creature")   
-})    
-
-//Minion
-scene.onOverlapTile(SpriteKind.Player1Fighter, assets.tile`MinionTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`MinionSelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Minion")
-})
-//Rain Catcher 
-scene.onOverlapTile(SpriteKind.Player1Fighter, assets.tile`RainCatcherTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`RCSelectImg`);
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "RainCatcher")
-    
-})
-//Among Us
-scene.onOverlapTile(SpriteKind.Player1Fighter, assets.tile`AmongUsTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`AmongUsSelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "AmongUs")
-    
-})
-//Codey
-scene.onOverlapTile(SpriteKind.Player1Fighter, assets.tile`HankTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`HankSelectImg`);
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Hank")
-})
-//Codey
-scene.onOverlapTile(SpriteKind.Player1Fighter, assets.tile`CodeyTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`CodeySelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Codey")
-})
-//Barth
-scene.onOverlapTile(SpriteKind.Player1Fighter, assets.tile`BarthTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`BarthSelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Barth")
-})
-//Dot
-scene.onOverlapTile(SpriteKind.Player1Fighter, assets.tile`DotTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`DotSelectImg`);
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Dot")
-})
-
-scene.onOverlapTile(SpriteKind.Player1Fighter, assets.tile`DarkCreatureTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`DarkCSelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "DarkCreature")
-})
+// Keybinds.setSimulatorKeymap(
+//     Keybinds.PlayerNumber.TWO, 
+//     Keybinds.CustomKey.UP,     
+//     Keybinds.CustomKey.DOWN,   
+//     Keybinds.CustomKey.LEFT,   
+//     Keybinds.CustomKey.RIGHT,  
+//     Keybinds.CustomKey.O,      
+//     Keybinds.CustomKey.P       
+// );
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-
-
-//Creature
-scene.onOverlapTile(SpriteKind.Player2Fighter, assets.tile`CreatureTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`CreatureSelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Creature")   
-})    
-
-//Minion
-scene.onOverlapTile(SpriteKind.Player2Fighter, assets.tile`MinionTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`MinionSelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Minion")
-})
-//Rain Catcher 
-scene.onOverlapTile(SpriteKind.Player2Fighter, assets.tile`RainCatcherTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`RCSelectImg`);
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "RainCatcher")
-    
-})
-//Among Us
-scene.onOverlapTile(SpriteKind.Player2Fighter, assets.tile`AmongUsTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`AmongUsSelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "AmongUs")
-    
-})
-//Codey
-scene.onOverlapTile(SpriteKind.Player2Fighter, assets.tile`HankTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`HankSelectImg`);
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Hank")
-})
-//Codey
-scene.onOverlapTile(SpriteKind.Player2Fighter, assets.tile`CodeyTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`CodeySelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Codey")
-})
-//Barth
-scene.onOverlapTile(SpriteKind.Player2Fighter, assets.tile`BarthTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`BarthSelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Barth")
-})
-//Dot
-scene.onOverlapTile(SpriteKind.Player2Fighter, assets.tile`DotTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`DotSelectImg`);
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "Dot")
-})
-
-scene.onOverlapTile(SpriteKind.Player2Fighter, assets.tile`DarkCreatureTile`, function (sprite) {
-    charSelect.displayCharSelectImg(sprites.readDataNumber(sprite, "PlayerNumber"), assets.image`DarkCSelectImg`)
-    charSelect.changePlayerCharacter(sprites.readDataNumber(sprite, "PlayerNumber"), "DarkCreature")
-})
-
-   
+// Does the overlap on a per-player basis. If wanting to extend to more than two, easily done
+overlapHandle.setupOverlapHandlers(SpriteKind.Player1Fighter);
+overlapHandle.setupOverlapHandlers(SpriteKind.Player2Fighter);
 
 
 
@@ -230,10 +134,4 @@ function playSong(songName: string) {
     }
     music.setVolume(75);
 }
-
-
-
-
-
-
 
