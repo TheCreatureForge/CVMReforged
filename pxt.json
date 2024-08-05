@@ -19,7 +19,6 @@
     "dependencies": {
         "device": "*",
         "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
-        "custom-keybind-extension": "github:brohann3214/custom-keybind-extension#master",
         "arcade-timers": "github:microsoft/arcade-timers#v1.1.0",
         "Color Fading": "github:jwunderl/pxt-color#v0.2.3",
         "arcade-background-scroll": "github:microsoft/arcade-background-scroll#v0.1.2"
