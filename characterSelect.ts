@@ -108,8 +108,8 @@ namespace charSelect {
                             //stateOfGame = "Fight"
                             scroller.scrollBackgroundWithSpeed(0, 0)
                             tiles.setCurrentTilemap(assets.tilemap`Floor`);
-                            SetUpFighters()
-
+                            fightSetup.SetUpFighters(player1Character, player1);
+                            fightSetup.SetUpFighters(player2Character, player2);
 
                             controller.moveSprite(player1, sprites.readDataNumber(player1, "speed"),0)
                             controller.player2.moveSprite(player2, sprites.readDataNumber(player2, "speed"),0)
