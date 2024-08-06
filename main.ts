@@ -6,25 +6,25 @@ namespace SpriteKind{
 }
 //sets up unique key mappings
 
-Keybinds.setSimulatorKeymap(
-    Keybinds.PlayerNumber.ONE, 
-    Keybinds.CustomKey.W,      
-    Keybinds.CustomKey.S,      
-    Keybinds.CustomKey.A,      
-    Keybinds.CustomKey.D,      
-    Keybinds.CustomKey.C,      
-    Keybinds.CustomKey.V       
-);
+// Keybinds.setSimulatorKeymap(
+//     Keybinds.PlayerNumber.ONE, 
+//     Keybinds.CustomKey.W,      
+//     Keybinds.CustomKey.S,      
+//     Keybinds.CustomKey.A,      
+//     Keybinds.CustomKey.D,      
+//     Keybinds.CustomKey.C,      
+//     Keybinds.CustomKey.V       
+// );
 
-Keybinds.setSimulatorKeymap(
-    Keybinds.PlayerNumber.TWO, 
-    Keybinds.CustomKey.UP,     
-    Keybinds.CustomKey.DOWN,   
-    Keybinds.CustomKey.LEFT,   
-    Keybinds.CustomKey.RIGHT,  
-    Keybinds.CustomKey.O,      
-    Keybinds.CustomKey.P       
-);
+// Keybinds.setSimulatorKeymap(
+//     Keybinds.PlayerNumber.TWO, 
+//     Keybinds.CustomKey.UP,     
+//     Keybinds.CustomKey.DOWN,   
+//     Keybinds.CustomKey.LEFT,   
+//     Keybinds.CustomKey.RIGHT,  
+//     Keybinds.CustomKey.O,      
+//     Keybinds.CustomKey.P       
+// );
 
 
 
