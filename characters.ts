@@ -26,6 +26,21 @@ namespace characters {
         
     };
 
+
+    export function ApplyCharStats(sprite: Sprite, char:CMakeNS.selectChar, direction: string) {
+        sprites.setDataNumber(sprite, "hp", char.hp);
+        sprites.setDataNumber(sprite, "speed", char.speed);
+        sprites.setDataNumber(sprite, "jumpCount", char.jumpCount);
+        sprites.setDataNumber(sprite, "characterDamage", char.characterDamage);
+        sprite.ay = char.characterGravity;
+
+        
+        sprites.setDataNumber(sprite, "characterJumpSpeed", char.characterJumpSpeed);
+        sprites.setDataString(sprite,"direction", direction)
+
+        sprite.setImage(char.image);
+    }
+
 }
 
 

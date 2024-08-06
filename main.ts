@@ -6,25 +6,25 @@ namespace SpriteKind{
 }
 //sets up unique key mappings
 
-Keybinds.setSimulatorKeymap(
-    Keybinds.PlayerNumber.ONE, 
-    Keybinds.CustomKey.W,      
-    Keybinds.CustomKey.S,      
-    Keybinds.CustomKey.A,      
-    Keybinds.CustomKey.D,      
-    Keybinds.CustomKey.C,      
-    Keybinds.CustomKey.V       
-);
+// Keybinds.setSimulatorKeymap(
+//     Keybinds.PlayerNumber.ONE, 
+//     Keybinds.CustomKey.W,      
+//     Keybinds.CustomKey.S,      
+//     Keybinds.CustomKey.A,      
+//     Keybinds.CustomKey.D,      
+//     Keybinds.CustomKey.C,      
+//     Keybinds.CustomKey.V       
+// );
 
-Keybinds.setSimulatorKeymap(
-    Keybinds.PlayerNumber.TWO, 
-    Keybinds.CustomKey.UP,     
-    Keybinds.CustomKey.DOWN,   
-    Keybinds.CustomKey.LEFT,   
-    Keybinds.CustomKey.RIGHT,  
-    Keybinds.CustomKey.O,      
-    Keybinds.CustomKey.P       
-);
+// Keybinds.setSimulatorKeymap(
+//     Keybinds.PlayerNumber.TWO, 
+//     Keybinds.CustomKey.UP,     
+//     Keybinds.CustomKey.DOWN,   
+//     Keybinds.CustomKey.LEFT,   
+//     Keybinds.CustomKey.RIGHT,  
+//     Keybinds.CustomKey.O,      
+//     Keybinds.CustomKey.P       
+// );
 
 
 
@@ -66,95 +66,6 @@ let hank = characters.characterList.Hank;
 let barth = characters.characterList.Barth;
 let dot = characters.characterList.Dot;
 let darkCreature = characters.characterList.DarkCreature;
-
-// player1.setImage(creature.getSprite());
-//sprites.setDataNumber(creature.hp)
-
-function ApplyCharStats(sprite: Sprite, char:CMakeNS.selectChar, direction: string) {
-    sprites.setDataNumber(sprite, "hp", char.hp);
-    sprites.setDataNumber(sprite, "speed", char.speed);
-    sprites.setDataNumber(sprite, "jumpCount", char.jumpCount);
-    sprites.setDataNumber(sprite, "characterDamage", char.characterDamage);
-    sprite.ay = char.characterGravity;
-
-    
-    sprites.setDataNumber(sprite, "characterJumpSpeed", char.characterJumpSpeed);
-    sprites.setDataString(sprite,"direction", direction)
-
-    sprite.setImage(char.image);
-}
-
-function SetUpFighters() {
-    player1.scale = 1;
-    player2.scale = 1;
-
-    switch (player1Character) {
-        case "Creature":
-            ApplyCharStats(player1, creature, "Right");
-            break;
-        case "Minion": 
-            ApplyCharStats(player1, minion, "Right");
-            break;
-        case "RainCatcher": 
-            ApplyCharStats(player1, raincatcher, "Right");
-            break;
-        case "AmongUs": 
-            ApplyCharStats(player1, crewmate, "Right");
-            break;
-        case "Codey": 
-            ApplyCharStats(player1, codey, "Right");
-            break;
-        case "Hank": 
-            ApplyCharStats(player1, hank, "Right");
-            break;
-        case "Barth": 
-            ApplyCharStats(player1, barth, "Right");
-            break;
-        case "Dot": 
-            ApplyCharStats(player1, dot, "Right");
-            break;
-        case "DarkCreature": 
-            ApplyCharStats(player1, darkCreature, "Right");
-            break;
-        default:
-            ApplyCharStats(player1, creature, "Right");
-    }
-    
-    switch (player2Character) {
-        case "Creature":
-            ApplyCharStats(player2, creature, "Left");
-            break;
-        case "Minion": 
-            ApplyCharStats(player2, minion, "Left");
-            break;
-        case "RainCatcher": 
-            ApplyCharStats(player2, raincatcher, "Left");
-            break;
-        case "AmongUs": 
-            ApplyCharStats(player2, crewmate, "Left");
-            break;
-        case "Codey": 
-            ApplyCharStats(player2, codey, "Left");
-            break;
-        case "Hank": 
-            ApplyCharStats(player2, hank, "Left");
-            break;
-        case "Barth": 
-            ApplyCharStats(player2, barth, "Left");
-            break;
-        case "Dot": 
-            ApplyCharStats(player2, dot, "Left");
-            break;
-        case "DarkCreature": 
-            ApplyCharStats(player2, darkCreature, "Left");
-            break;
-        default:
-            ApplyCharStats(player2, creature, "Left");
-        }
-        
-        player2.image.flipX()
-}
-    
 
 //These are the drop down titles 
 let Title1 = sprites.create(assets.image`NullImage`, SpriteKind.Prop);
