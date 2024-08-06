@@ -89,9 +89,8 @@ namespace charSelect {
                 //Set up fighting arena background
                 timer.after(4000, function () {
                     scene.setBackgroundImage(assets.image`Arena1Background`);
-    
-                    // player1.destroy();
-                    // player2.destroy();
+                    
+                    player1.setImage(assets.image`NullImage`)
                     Title1.destroy();
                     Title2.destroy();
                     color.startFade(color.Black, color.originalPalette, 4000)
@@ -239,21 +238,21 @@ namespace charSelect {
 
 
 
-    controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+    // controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
         
-        if (stateOfGame == "Fight" && sprites.readDataNumber(player1, "characterJumpSpeed") ) {
-            player1.vy = sprites.readDataNumber(player1, "characterJumpSpeed");
-            //num  
-        }
+    //     if (stateOfGame == "Fight" && sprites.readDataNumber(player1, "characterJumpSpeed") ) {
+    //         player1.vy = sprites.readDataNumber(player1, "characterJumpSpeed");
+    //         //num  
+    //     }
        
-    })
+    // })
 
-    controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
-        if (stateOfGame == "Fight") {
-            player2.vy = sprites.readDataNumber(player2, "characterJumpSpeed"); 
-        }
+    // controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+    //     if (stateOfGame == "Fight") {
+    //         player2.vy = sprites.readDataNumber(player2, "characterJumpSpeed"); 
+    //     }
        
-    })    
+    // })    
 
 
 
