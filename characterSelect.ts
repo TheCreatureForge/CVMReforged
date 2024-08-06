@@ -64,7 +64,7 @@ namespace charSelect {
     function startGame() {
         //checks if both players lock in a charcter
         if (sprites.readDataBoolean(player1Cursor, "player1Ready") == true && sprites.readDataBoolean(player2Cursor, "player2Ready") == true && stateOfGame == "Select") {
-            //stateOfGame = "Fight"
+             stateOfGame = "Fight"
             info.stopCountdown();
             //Versus Card
             timer.after(1000, function () {
@@ -105,7 +105,7 @@ namespace charSelect {
                         effects.blizzard.startScreenEffect(4000)
                         
                         timer.after(753, function () {
-                            stateOfGame = "Fight"
+                            //stateOfGame = "Fight"
                             scroller.scrollBackgroundWithSpeed(0, 0)
                             tiles.setCurrentTilemap(assets.tilemap`Floor`);
                             SetUpFighters()
@@ -234,14 +234,13 @@ namespace charSelect {
             startGame()
             sprites.destroy(player2Cursor, effects.coolRadial, 500);
               
-        }
-    
-       
+        }  
     })
 
 
 
     controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+        
         if (stateOfGame == "Fight" && sprites.readDataNumber(player1, "characterJumpSpeed") ) {
             player1.vy = sprites.readDataNumber(player1, "characterJumpSpeed");
             //num  
