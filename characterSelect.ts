@@ -64,7 +64,7 @@ namespace charSelect {
     function startGame() {
         //checks if both players lock in a charcter
         if (sprites.readDataBoolean(player1Cursor, "player1Ready") == true && sprites.readDataBoolean(player2Cursor, "player2Ready") == true && stateOfGame == "Select") {
-            stateOfGame = "Loading"
+             stateOfGame = "Fight"
             info.stopCountdown();
             //Versus Card
             timer.after(1000, function () {
@@ -89,15 +89,12 @@ namespace charSelect {
                 //Set up fighting arena background
                 timer.after(4000, function () {
                     scene.setBackgroundImage(assets.image`Arena1Background`);
-                    
-                    player1.setImage(assets.image`NullImage`)
-                    player2.setImage(assets.image`NullImage`)
-
-
+    
+                    // player1.destroy();
+                    // player2.destroy();
                     Title1.destroy();
                     Title2.destroy();
-                    color.startFade(color.Black, color.originalPalette, 4000);
-
+                    color.startFade(color.Black, color.originalPalette, 4000)
                     timer.after(3000, function () {
                         if (Math.percentChance(50)) {
                             playSong("Cythia");
@@ -108,14 +105,11 @@ namespace charSelect {
                         effects.blizzard.startScreenEffect(4000)
                         
                         timer.after(753, function () {
-                            stateOfGame = "Fight"
+                            //stateOfGame = "Fight"
                             scroller.scrollBackgroundWithSpeed(0, 0)
                             tiles.setCurrentTilemap(assets.tilemap`Floor`);
                             fightSetup.SetUpFighters(player1Character, player1);
                             fightSetup.SetUpFighters(player2Character, player2);
-
-                            player2.image.flipX();
-
 
                             controller.moveSprite(player1, sprites.readDataNumber(player1, "speed"),0)
                             controller.player2.moveSprite(player2, sprites.readDataNumber(player2, "speed"),0)
@@ -161,6 +155,12 @@ namespace charSelect {
         player1Cursor.y += 16;
     })
 
+    controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+        player1Cursor.y -= 16;
+    })
+
+
+    
     //creates the cursor and its movement for player 2
     export function createCursor2(){
         let player2Cursor = sprites.create(assets.image`Cursor2`, SpriteKind.Player2Fighter);
@@ -183,9 +183,9 @@ namespace charSelect {
         player2Cursor.y += 16;
     })
 
-    // controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
-    //     player2Cursor.y -= 16;
-    // })
+    controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+        player2Cursor.y -= 16;
+    })
 
     //changes a var found in main.ts which hold what character a person picked, also call what tiltle card animation should play
     export function changePlayerCharacter(playerNum: number, character: string) {
@@ -240,10 +240,10 @@ namespace charSelect {
 
 
     controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
+        
         if (stateOfGame == "Fight" && sprites.readDataNumber(player1, "characterJumpSpeed") ) {
             player1.vy = sprites.readDataNumber(player1, "characterJumpSpeed");
-        }else {
-            player2Cursor.y += 16;
+            //num  
         }
        
     })
@@ -251,10 +251,15 @@ namespace charSelect {
     controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
         if (stateOfGame == "Fight") {
             player2.vy = sprites.readDataNumber(player2, "characterJumpSpeed"); 
-        } else {
-            player2Cursor.y -= 16;
         }
+       
     })    
+
+
+
+
+    
+
 
 }
 
