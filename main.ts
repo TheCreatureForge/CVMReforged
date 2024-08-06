@@ -6,27 +6,25 @@ namespace SpriteKind{
 }
 //sets up unique key mappings
 
-// Keybinds.setSimulatorKeymap(
-//     Keybinds.PlayerNumber.ONE, 
-//     Keybinds.CustomKey.W,      
-//     Keybinds.CustomKey.S,      
-//     Keybinds.CustomKey.A,      
-//     Keybinds.CustomKey.D,      
-//     Keybinds.CustomKey.C,      
-//     Keybinds.CustomKey.V       
-// );
+Keybinds.setSimulatorKeymap(
+    Keybinds.PlayerNumber.ONE, 
+    Keybinds.CustomKey.W,
+    Keybinds.CustomKey.S,
+    Keybinds.CustomKey.A,
+    Keybinds.CustomKey.D,
+    Keybinds.CustomKey.C,
+    Keybinds.CustomKey.V
+);
 
-// Keybinds.setSimulatorKeymap(
-//     Keybinds.PlayerNumber.TWO, 
-//     Keybinds.CustomKey.UP,     
-//     Keybinds.CustomKey.DOWN,   
-//     Keybinds.CustomKey.LEFT,   
-//     Keybinds.CustomKey.RIGHT,  
-//     Keybinds.CustomKey.O,      
-//     Keybinds.CustomKey.P       
-// );
-
-
+Keybinds.setSimulatorKeymap(
+    Keybinds.PlayerNumber.TWO, 
+    Keybinds.CustomKey.UP,
+    Keybinds.CustomKey.DOWN,
+    Keybinds.CustomKey.LEFT,
+    Keybinds.CustomKey.RIGHT,
+    Keybinds.CustomKey.O,
+    Keybinds.CustomKey.P
+);
 
 // Does the overlap on a per-player basis. If wanting to extend to more than two, easily done
 overlapHandle.setupOverlapHandlers(SpriteKind.Player1Fighter);
@@ -57,15 +55,8 @@ let player2 = sprites.create(assets.image`NullImage`, SpriteKind.Player2Fighter)
 player2.setPosition(100, 30);
 player2.scale = 2;
 
-let creature = characters.characterList.Creature;
-let minion = characters.characterList.Minion;
-let raincatcher = characters.characterList.Raincatcher;
-let crewmate = characters.characterList.Crewmate;
-let codey = characters.characterList.Codey;
-let hank = characters.characterList.Hank;
-let barth = characters.characterList.Barth;
-let dot = characters.characterList.Dot;
-let darkCreature = characters.characterList.DarkCreature;
+
+
 
 //These are the drop down titles 
 let Title1 = sprites.create(assets.image`NullImage`, SpriteKind.Prop);
@@ -94,8 +85,6 @@ game.onUpdate(function () {
     if (stateOfGame == "Fight") {
         player1.say(sprites.readDataString(player1, "direction"));
         player2.say(sprites.readDataString(player2, "direction"));
-
-
 
         if (player1.x < player2.x && sprites.readDataString(player1, "direction") != "Right") {
             player1.image.flipX()

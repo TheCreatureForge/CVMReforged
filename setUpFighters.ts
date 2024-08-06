@@ -7,37 +7,36 @@ namespace fightSetup {
 
         switch (player) {
             case "Creature":
-                characters.ApplyCharStats(sprite, creature, dir);
+                characters.ApplyCharStats(sprite, characters.characterList.Creature, dir);
                 break;
             case "Minion": 
-                characters.ApplyCharStats(sprite, minion, dir);
+                characters.ApplyCharStats(sprite, characters.characterList.Minion, dir);
                 break;
             case "RainCatcher": 
-                characters.ApplyCharStats(sprite, raincatcher, dir);
+                characters.ApplyCharStats(sprite, characters.characterList.Raincatcher, dir);
                 break;
             case "AmongUs": 
-                characters.ApplyCharStats(sprite, crewmate, dir);
+                characters.ApplyCharStats(sprite, characters.characterList.Crewmate, dir);
                 break;
             case "Codey": 
-                characters.ApplyCharStats(sprite, codey, dir);
+                characters.ApplyCharStats(sprite, characters.characterList.Codey, dir);
                 break;
             case "Hank": 
-                characters.ApplyCharStats(sprite, hank, dir);
+                characters.ApplyCharStats(sprite, characters.characterList.Hank, dir);
                 break;
             case "Barth": 
-                characters.ApplyCharStats(sprite, barth, dir);
+                characters.ApplyCharStats(sprite, characters.characterList.Barth, dir);
                 break;
             case "Dot": 
-                characters.ApplyCharStats(sprite, dot, dir);
+                characters.ApplyCharStats(sprite, characters.characterList.Dot, dir);
                 break;
             case "DarkCreature": 
-                characters.ApplyCharStats(sprite, darkCreature, dir);
+                characters.ApplyCharStats(sprite, characters.characterList.DarkCreature, dir);
                 break;
             default:
-                characters.ApplyCharStats(sprite, creature, dir);
+                characters.ApplyCharStats(sprite, characters.characterList.Creature, dir);
         }
-        if (player === "player2") {
-            player2.image.flipX()
-        }
+
+       
     }
 }

@@ -13,15 +13,15 @@ namespace characters {
 
         Crewmate: new CMakeNS.selectChar(200, 55, 2, -7, 275, -135, assets.image`CrewmateModel`),
 
-        Codey: new CMakeNS.selectChar(180, 64, 3, -6, 350, -135, assets.image`TestCharacter`),
+        Codey: new CMakeNS.selectChar(180, 64, 3, -6, 350, -135, assets.image`CodeyModel`),
 
-        Hank: new CMakeNS.selectChar(250, 55, 2, -8, 360, -160, assets.image`TestCharacter`),
+        Hank: new CMakeNS.selectChar(250, 55, 2, -8, 360, -160, assets.image`HankModel`),
 
-        Barth: new CMakeNS.selectChar(200, 50, 2, -3.5, 355, -200, assets.image`TestCharacter`),
+        Barth: new CMakeNS.selectChar(200, 50, 2, -3.5, 355, -200, assets.image`BarthModel`),
 
-        Dot: new CMakeNS.selectChar(225, 55, 1, -7, 400, -200, assets.image`TestCharacter`),
+        Dot: new CMakeNS.selectChar(225, 55, 1, -7, 400, -200, assets.image`DotModel`),
 
-        DarkCreature: new CMakeNS.selectChar(200, 60, 2, -7, 350, -160, assets.image`TestCharacter`),
+        DarkCreature: new CMakeNS.selectChar(200, 60, 2, -7, 350, -160, assets.image`DarkCreatureModel`),
 
         
     };
