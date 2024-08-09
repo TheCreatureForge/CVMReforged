@@ -6,7 +6,6 @@ namespace charSelect {
     //add a title art to come down when cursor is hovering tile, add case for each character
     function titleCardAnim(character:string, title: Sprite) {
         if (sprites.readDataString(title, "AnimState") == "Away") {
-            console.log(character);
             switch (character) {
                 case "Creature":
                     animation.runImageAnimation(title, assets.animation`CreatureTitleDownAnim`, 60, false);
@@ -61,7 +60,7 @@ namespace charSelect {
 
     //Start the fighting process and switched to the V.S scene
     //If you want to add more ARENA BACKGROUNDS or FIGHTING MUSIC you would add here 
-    function startGame() {
+    export function startGame() {
         //checks if both players lock in a charcter
         if (sprites.readDataBoolean(player1Cursor, "player1Ready") == true && sprites.readDataBoolean(player2Cursor, "player2Ready") == true && stateOfGame == "Select") {
             stateOfGame = "Loading"
@@ -99,11 +98,11 @@ namespace charSelect {
                     color.startFade(color.Black, color.originalPalette, 4000);
 
                     timer.after(3000, function () {
-                        if (Math.percentChance(50)) {
-                            playSong("Cythia");
-                        } else {
-                            playSong("MetalCrusher");
-                        }
+                        // if (Math.percentChance(50)) {
+                        //     playSong("Cythia");
+                        // } else {
+                        //     playSong("MetalCrusher");
+                        // }
                         scroller.scrollBackgroundWithSpeed(-350,0)
                         effects.blizzard.startScreenEffect(4000)
                         
@@ -111,10 +110,11 @@ namespace charSelect {
                             stateOfGame = "Fight"
                             scroller.scrollBackgroundWithSpeed(0, 0)
                             tiles.setCurrentTilemap(assets.tilemap`Floor`);
-                            fightSetup.SetUpFighters(player1Character, player1);
-                            fightSetup.SetUpFighters(player2Character, player2);
 
-                            player2.image.flipX();
+                            fightSetup.SetUpFighters(player1Character,1, player1);
+                            fightSetup.SetUpFighters(player2Character,2, player2);
+
+                            //player2.image.flipX();
 
 
                             controller.moveSprite(player1, sprites.readDataNumber(player1, "speed"),0)
@@ -138,7 +138,7 @@ namespace charSelect {
             player2.image.flipX();
         }
     }
-    
+
     //creates the cursor and its movement for player 1
     export function createCursor1() {
         let player1Cursor = sprites.create(assets.image`Cursor`, SpriteKind.Player1Fighter);
@@ -149,17 +149,6 @@ namespace charSelect {
         return player1Cursor;
     }
 
-    controller.player1.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
-        player1Cursor.x += 16;
-    })
-
-    controller.player1.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
-        player1Cursor.x -= 16;
-    })
-
-    controller.player1.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Pressed, function () {
-        player1Cursor.y += 16;
-    })
 
     //creates the cursor and its movement for player 2
     export function createCursor2(){
@@ -171,21 +160,6 @@ namespace charSelect {
         return player2Cursor;
     }
 
-    controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
-        player2Cursor.x += 16;
-    })
-
-    controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
-        player2Cursor.x -= 16;
-    })
-
-    controller.player2.onButtonEvent(ControllerButton.Down, ControllerButtonEvent.Pressed, function () {
-        player2Cursor.y += 16;
-    })
-
-    // controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
-    //     player2Cursor.y -= 16;
-    // })
 
     //changes a var found in main.ts which hold what character a person picked, also call what tiltle card animation should play
     export function changePlayerCharacter(playerNum: number, character: string) {
@@ -212,49 +186,8 @@ namespace charSelect {
     }
 
 
-    //Locks in player1 character when the press shoot on a tile
-    controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
-        if (stateOfGame == "Select") {
-            music.play(music.melodyPlayable(music.beamUp), music.PlaybackMode.InBackground)
-            scene.cameraShake(2, 500)
-            sprites.setDataBoolean(player1Cursor, "player1Ready", true);
-            startGame();
-            sprites.destroy(player1Cursor, effects.coolRadial, 500);    
-        }
-       
-    })
-    
+   
 
-       //Locks in player2 character when the press shoot on a tile
-    controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
-        if (stateOfGame == "Select") {
-            sprites.setDataBoolean(player2Cursor, "player2Ready", true);
-            music.play(music.melodyPlayable(music.beamUp), music.PlaybackMode.InBackground)
-            scene.cameraShake(2, 500)
-            startGame()
-            sprites.destroy(player2Cursor, effects.coolRadial, 500);
-              
-        }  
-    })
-
-
-
-    controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
-        if (stateOfGame == "Fight" && sprites.readDataNumber(player1, "characterJumpSpeed") ) {
-            player1.vy = sprites.readDataNumber(player1, "characterJumpSpeed");
-        }else {
-            player2Cursor.y += 16;
-        }
-       
-    })
-
-    controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
-        if (stateOfGame == "Fight") {
-            player2.vy = sprites.readDataNumber(player2, "characterJumpSpeed"); 
-        } else {
-            player2Cursor.y -= 16;
-        }
-    })    
 
 }
 

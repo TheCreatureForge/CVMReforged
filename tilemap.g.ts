@@ -259,17 +259,6 @@ namespace myTiles {
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
-            case "CharSelectTM":
-            case "CharSelectTM1":return tiles.createTilemap(hex`0a000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010203040506070800000a000000000000090000000000000000000000`, img`
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-2 2 2 2 2 2 2 2 2 2 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-`, [myTiles.transparency16,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,myTiles.tile9,myTiles.tile11], TileScale.Sixteen);
             case "Floor":
             case "Floor1":return tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001020202020202020203`, img`
 . . . . . . . . . . 
@@ -281,6 +270,17 @@ namespace myTiles {
 . . . . . . . . . . 
 2 2 2 2 2 2 2 2 2 2 
 `, [myTiles.transparency16,sprites.builtin.forestTiles1,sprites.builtin.forestTiles2,sprites.builtin.forestTiles3], TileScale.Sixteen);
+            case "CharSelectTM":
+            case "CharSelectTM1":return tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000102000000000000000000000000000000000000000000000000000000`, img`
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+2 2 2 2 2 2 2 2 2 2 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+`, [myTiles.transparency16,myTiles.tile1,myTiles.tile2], TileScale.Sixteen);
         }
         return null;
     })

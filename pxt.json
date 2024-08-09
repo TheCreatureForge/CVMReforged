@@ -8,11 +8,15 @@
         "tilemap.g.ts",
         "main.ts",
         "CharacterMake.ts",
-        "characters.ts",
         "importFiles.ts",
         "characterSelect.ts",
         "overlapHandler.ts",
-        "setUpFighters.ts"
+        "setUpFighters.ts",
+        "Controls.ts",
+        "projectiles.ts",
+        "creature.ts",
+        "minion.ts",
+        "characterStats.ts"
     ],
     "supportedTargets": [
         "arcade"
@@ -23,7 +27,10 @@
         "custom-keybind-extension": "github:brohann3214/custom-keybind-extension#master",
         "arcade-timers": "github:microsoft/arcade-timers#v1.1.0",
         "Color Fading": "github:jwunderl/pxt-color#v0.2.3",
-        "arcade-background-scroll": "github:microsoft/arcade-background-scroll#v0.1.2"
+        "arcade-background-scroll": "github:microsoft/arcade-background-scroll#v0.1.2",
+        "deltatime": "github:kiwiphoenix364/pxt-deltatime#v3.0.0",
+        "status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
+        "arcade-sprite-events": "github:riknoll/arcade-sprite-events#master"
     },
     "targetVersions": {
         "branch": "v1.12.55",

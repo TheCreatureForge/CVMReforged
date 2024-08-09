@@ -6,25 +6,28 @@ namespace SpriteKind{
 }
 //sets up unique key mappings
 
-Keybinds.setSimulatorKeymap(
-    Keybinds.PlayerNumber.ONE, 
-    Keybinds.CustomKey.W,
-    Keybinds.CustomKey.S,
-    Keybinds.CustomKey.A,
-    Keybinds.CustomKey.D,
-    Keybinds.CustomKey.C,
-    Keybinds.CustomKey.V
-);
+let temp = creature.exportStats();
 
-Keybinds.setSimulatorKeymap(
-    Keybinds.PlayerNumber.TWO, 
-    Keybinds.CustomKey.UP,
-    Keybinds.CustomKey.DOWN,
-    Keybinds.CustomKey.LEFT,
-    Keybinds.CustomKey.RIGHT,
-    Keybinds.CustomKey.O,
-    Keybinds.CustomKey.P
-);
+
+// Keybinds.setSimulatorKeymap(
+//     Keybinds.PlayerNumber.ONE, 
+//     Keybinds.CustomKey.W,
+//     Keybinds.CustomKey.S,
+//     Keybinds.CustomKey.A,
+//     Keybinds.CustomKey.D,
+//     Keybinds.CustomKey.C,
+//     Keybinds.CustomKey.V
+// );
+
+// Keybinds.setSimulatorKeymap(
+//     Keybinds.PlayerNumber.TWO, 
+//     Keybinds.CustomKey.UP,
+//     Keybinds.CustomKey.DOWN,
+//     Keybinds.CustomKey.LEFT,
+//     Keybinds.CustomKey.RIGHT,
+//     Keybinds.CustomKey.O,
+//     Keybinds.CustomKey.P
+// );
 
 // Does the overlap on a per-player basis. If wanting to extend to more than two, easily done
 overlapHandle.setupOverlapHandlers(SpriteKind.Player1Fighter);
@@ -45,22 +48,38 @@ let stateOfGame = "Select"
 let player1Character = "";
 let player2Character = "";
 
+
+
 //VERY IMPORTANT
 //creates both players, these are sprites that the players will be controlling, they are also used for splash arts 
 let player1 = sprites.create(assets.image`NullImage`, SpriteKind.Player1Fighter);
+sprites.setDataNumber(player1, "playerNum", 1);
 player1.setPosition(25, 30);
 player1.scale = 2;
 
 let player2 = sprites.create(assets.image`NullImage`, SpriteKind.Player2Fighter);
+sprites.setDataNumber(player2, "playerNum", 2);
 player2.setPosition(100, 30);
 player2.scale = 2;
 
+let player1HealthBar: StatusBarSprite;
+let player1EnergyBar: StatusBarSprite;
 
-
+let player2HealthBar: StatusBarSprite;
+let player2EnergyBar: StatusBarSprite;
 
 //These are the drop down titles 
 let Title1 = sprites.create(assets.image`NullImage`, SpriteKind.Prop);
 let Title2 = sprites.create(assets.image`NullImage`, SpriteKind.Prop);
+
+game.onUpdateInterval(200, function () {
+    if (stateOfGame == "Fight") {
+        player1EnergyBar.value += 5
+        player2EnergyBar.value += 5
+    }
+})
+
+
 
 Title1.setPosition(8, 8);
 Title2.setPosition(106, 8);
@@ -83,9 +102,7 @@ info.startCountdown(30);
 
 game.onUpdate(function () {
     if (stateOfGame == "Fight") {
-        player1.say(sprites.readDataString(player1, "direction"));
-        player2.say(sprites.readDataString(player2, "direction"));
-
+       
         if (player1.x < player2.x && sprites.readDataString(player1, "direction") != "Right") {
             player1.image.flipX()
             player2.image.flipX()
@@ -102,6 +119,8 @@ game.onUpdate(function () {
         }
     }
 })
+
+
 
 //Character select songs
 if (Math.percentChance(70)) {
@@ -155,3 +174,17 @@ function playSong(songName: string) {
     music.setVolume(75);
 }
 
+events.spriteEvent(SpriteKind.Player, SpriteKind.Projectile, events.SpriteEvent.StartOverlapping, function (sprite, otherSprite) {
+
+    if (sprites.readDataNumber(sprite, "playerNum") != sprites.readDataNumber(otherSprite, "ownersPlayerNum") ) {
+        if (sprites.readDataNumber(sprite, "playerNum") == 1) {
+            player1HealthBar.value -= sprites.readDataNumber(otherSprite, "damage");
+        } else {
+            player2HealthBar.value -= sprites.readDataNumber(otherSprite, "damage");
+            
+        }
+        
+        sprites.destroy(otherSprite);
+    }
+
+})
