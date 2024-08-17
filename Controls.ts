@@ -2,16 +2,84 @@
 ///<reference path="./projectiles.ts" />
 ///<reference path="./creature.ts" />
 
-let player1JumpTimeCounter: number;
-let player1JumpTime: number;
-let player1AmountOfJumps: number;
-
-let player2JumpTimeCounter: number;
-let player2JumpTime: number;
-let player2AmountOfJumps: number;
 
 
+function characterAttack(player: Sprite, char: String, energyBar: StatusBarSprite) {
+    let projectile = sprites.createProjectileFromSprite(assets.image`NullImage`, player, 0, 0);
 
+        if (energyBar.value >= sprites.readDataNumber(player, "characterAEnergy") && sprites.readDataBoolean(player, "isStunned") == false) {
+
+            energyBar.value -= sprites.readDataNumber(player, "characterAEnergy")
+            switch (char) {
+                case "Creature":
+                    creature.creatureA(projectile, player);
+                    break;
+                case "Minion":
+                    minion.minionA(projectile, player);
+                    break;
+                default:
+                    projectile.destroy();
+            }   
+        }
+}
+
+function characterBackB(char: String, player: Sprite, energyBar: StatusBarSprite ) {
+    if (stateOfGame == "Fight") {
+        if (energyBar.value >= sprites.readDataNumber(player, "characterBBackEnergyCost") && sprites.readDataBoolean(player, "isStunned") == false) { 
+            
+            switch (char) {
+                case "Creature":
+                    creature.creatureBBack(player);
+                    break;
+                case "Minion":
+                    minion.minionBackB(player);
+                    break;
+                default:
+                    break;
+            }   
+        }
+         
+            
+    }
+}
+
+function characterDownB(char: String, player: Sprite, energyBar: StatusBarSprite ) {
+    if (stateOfGame == "Fight") {
+        if (energyBar.value >= sprites.readDataNumber(player, "characterBDownEnergyCost") && sprites.readDataBoolean(player, "isStunned") == false) { 
+            
+            switch (char) {
+                case "Creature":
+                    creature.creatureDownB(player);
+                    break;
+                case "Minion":
+                    minion.minionDownB(player);
+                    break;
+            }   
+        }
+         
+            
+    }
+}
+
+function characterB(char: String, player: Sprite, energyBar: StatusBarSprite) {
+    if (stateOfGame == "Fight") {
+        if (energyBar.value >= sprites.readDataNumber(player, "characterBEnergyCost") && sprites.readDataBoolean(player, "isStunned") == false) { 
+            
+            switch (char) {
+                case "Creature":
+                    creature.creatureB(player);
+                    break;
+                case "Minion":
+                    minion.minionB(player);
+                    break;
+            }   
+        }
+         
+            
+    }
+}
+
+//DO NOT CHANGE BELOW IF MAKING NEW CHARACTER
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 //Cursor Controls
@@ -58,29 +126,72 @@ controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Press
         sprites.destroy(player1Cursor, effects.coolRadial, 500); 
         
     } else if (stateOfGame == "Fight") {
-    
-        let projectile = sprites.createProjectileFromSprite(assets.image`NullImage`, player1, 0, 0);
-
-        if (player1EnergyBar.value >= sprites.readDataNumber(player1, "characterAEnergy")) {
-
-            player1EnergyBar.value -= sprites.readDataNumber(player1, "characterAEnergy")
-            switch (player1Character) {
-                case "Creature":
-                    creature.creatureA(projectile, player1);
-                    break;
-                case "Minion":
-                    minionA(projectile, player1);
-                    break;
-                default:
-                    projectile.destroy();
-            }   
-        }
+        characterAttack(player1, player1Character, player1EnergyBar);
             
     }
         
     
    
 })
+
+
+controller.player1.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
+    
+    if (controller.player1.isPressed(ControllerButton.Left) && isPlayerFacing(player1, "Right")) {
+        characterBackB(player1Character, player1, player1EnergyBar);      
+    } else if (controller.player1.isPressed(ControllerButton.Right) && isPlayerFacing(player1, "Left")) {
+        characterBackB(player1Character, player1, player1EnergyBar);
+    }else if (controller.player1.isPressed(ControllerButton.Down)) {
+        characterDownB(player1Character, player1, player1EnergyBar);
+    } else if(controller.player1.isPressed(ControllerButton.B) && !controller.player1.isPressed(ControllerButton.Down)) {
+        characterB(player1Character, player1, player1EnergyBar)
+    }
+   
+
+        
+})
+
+
+controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+    
+    if (stateOfGame == "Select") {
+        sprites.setDataBoolean(player2Cursor, "player2Ready", true);
+        music.play(music.melodyPlayable(music.beamUp), music.PlaybackMode.InBackground)
+        scene.cameraShake(2, 500)
+        charSelect.startGame()
+        sprites.destroy(player2Cursor, effects.coolRadial, 500);
+        
+    } else if (stateOfGame == "Fight") {
+        characterAttack(player2, player2Character, player2EnergyBar);   
+        
+    }
+})
+
+
+controller.player2.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
+    if (controller.player2.isPressed(ControllerButton.Left) && isPlayerFacing(player2, "Right")) {
+        characterBackB(player2Character, player2, player2EnergyBar);      
+    } else if (controller.player2.isPressed(ControllerButton.Right) && isPlayerFacing(player2, "Left")) {
+        characterBackB(player2Character, player2, player2EnergyBar);
+    }else if (controller.player2.isPressed(ControllerButton.Down)) {
+        characterDownB(player2Character, player2, player2EnergyBar);
+    } else if(controller.player2.isPressed(ControllerButton.B) && !controller.player2.isPressed(ControllerButton.Down)) {
+        characterB(player2Character, player2, player2EnergyBar)
+    }
+    
+})
+
+
+//JUMP CODE BELOW FOR BOTH PLAYERS
+/////////////////////////////////////////////////////////////////////////////////////////////////
+let player1JumpTimeCounter: number;
+let player1JumpTime: number;
+let player1AmountOfJumps: number;
+
+let player2JumpTimeCounter: number;
+let player2JumpTime: number;
+let player2AmountOfJumps: number;
+
 
 controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
     if (stateOfGame == "Fight") {
@@ -97,42 +208,6 @@ controller.player1.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Rele
         player1.vy = player1.vy / 2;
     }      
 })
-
-   //Locks in player2 character when they press shoot on a tile
-controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
-    
-    if (stateOfGame == "Select") {
-        sprites.setDataBoolean(player2Cursor, "player2Ready", true);
-        music.play(music.melodyPlayable(music.beamUp), music.PlaybackMode.InBackground)
-        scene.cameraShake(2, 500)
-        charSelect.startGame()
-        sprites.destroy(player2Cursor, effects.coolRadial, 500);
-          
-    } else if (stateOfGame == "Fight") {
-        let projectile = sprites.createProjectileFromSprite(assets.image`NullImage`, player2, 0, 0);
-
-        if (player2EnergyBar.value >= sprites.readDataNumber(player2, "characterAEnergy")) {
-
-            player2EnergyBar.value -= sprites.readDataNumber(player2, "characterAEnergy")
-            switch (player2Character) {
-                case "Creature":
-                    creature.creatureA(projectile, player2);
-                    break;
-                case "Minion":
-                    minionA(projectile, player2);
-                    break;
-                default:
-                    projectile.destroy();
-            }   
-        }
-
-        
-    }
-})
-
-
-
-
 
 controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Pressed, function () {
     if (stateOfGame == "Fight") {
@@ -153,28 +228,45 @@ controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Rele
 
 
 forever(function () {
+    
+    if (sprites.readDataBoolean(player1, "isStunned") == false) {
+        if (controller.up.isPressed() && player1JumpTimeCounter > 0 && player1AmountOfJumps < sprites.readDataNumber(player1, "jumpCount")) {
 
-    if (controller.up.isPressed() && player1JumpTimeCounter > 0 && player1AmountOfJumps < sprites.readDataNumber(player1, "jumpCount")) {
-        player1.vy = sprites.readDataNumber(player1, "characterJumpSpeed");
-        player1JumpTimeCounter -= Delta.RAW();
-        
-    }
+            if (isPlayerFacing(player1, "Right")) {
+                characterAnimations.runFrames(player1, player1Animation.jump, 20, characterAnimations.rule(Predicate.MovingUp));
+            } else {
+                characterAnimations.runFrames(player1, player1Animation.jumpLeft, 20, characterAnimations.rule(Predicate.MovingUp));
+            }
 
-    if (player1.isHittingTile(CollisionDirection.Bottom)) {
-        player1JumpTime = .1;
-        player1AmountOfJumps = 0;
+            player1.vy = sprites.readDataNumber(player1, "characterJumpSpeed");
+            player1JumpTimeCounter -= Delta.RAW();
+            
+        }
+    
+        if (player1.isHittingTile(CollisionDirection.Bottom)) {
+            player1JumpTime = .1;
+            player1AmountOfJumps = 0;
+        }
     }
     
-    if (controller.player2.up.isPressed() && player2JumpTimeCounter > 0 && player2AmountOfJumps < sprites.readDataNumber(player2, "jumpCount")) {
+    if (sprites.readDataBoolean(player2, "isStunned") == false) {
         
-        player2.vy = sprites.readDataNumber(player2, "characterJumpSpeed");
-        player2JumpTimeCounter -= Delta.RAW();
-        
+        if (controller.player2.up.isPressed() && player2JumpTimeCounter > 0 && player2AmountOfJumps < sprites.readDataNumber(player2, "jumpCount")) {
+            if (isPlayerFacing(player2, "Right")) {
+                characterAnimations.runFrames(player2, player2Animation.jump, 20, characterAnimations.rule(Predicate.MovingUp));
+            } else {
+                characterAnimations.runFrames(player2, player2Animation.jumpLeft, 20, characterAnimations.rule(Predicate.MovingUp));
+            }
+            player2.vy = sprites.readDataNumber(player2, "characterJumpSpeed");
+            player2JumpTimeCounter -= Delta.RAW();
+            
+        }
+    
+        if (player2.isHittingTile(CollisionDirection.Bottom)) {
+            player2JumpTime = .1;
+            player2AmountOfJumps = 0;
+        }
     }
-
-    if (player2.isHittingTile(CollisionDirection.Bottom)) {
-        player2JumpTime = .1;
-        player2AmountOfJumps = 0;
-    }
+    
 
 })

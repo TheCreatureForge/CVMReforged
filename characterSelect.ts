@@ -86,7 +86,7 @@ namespace charSelect {
                 player2.scale = 1.5;
         
                 //Set up fighting arena background
-                timer.after(4000, function () {
+                timer.after(1000, function () {
                     scene.setBackgroundImage(assets.image`Arena1Background`);
                     
                     player1.setImage(assets.image`NullImage`)
@@ -97,22 +97,31 @@ namespace charSelect {
                     Title2.destroy();
                     color.startFade(color.Black, color.originalPalette, 4000);
 
-                    timer.after(3000, function () {
-                        // if (Math.percentChance(50)) {
-                        //     playSong("Cythia");
-                        // } else {
-                        //     playSong("MetalCrusher");
-                        // }
+                    timer.after(1000, function () {
+                        switch (randint(0, 2)) {
+                            case 0:
+                                playSong("Cythia");
+                                break;
+                            case 1:
+                                playSong("MetalCrusher");
+                                break;
+                            case 2:
+                                playSong("Aot");
+                                break;
+                        }
+                        
+                        
                         scroller.scrollBackgroundWithSpeed(-350,0)
                         effects.blizzard.startScreenEffect(4000)
                         
-                        timer.after(753, function () {
+                        timer.after(753, function () { 
                             stateOfGame = "Fight"
                             scroller.scrollBackgroundWithSpeed(0, 0)
                             tiles.setCurrentTilemap(assets.tilemap`Floor`);
 
                             fightSetup.SetUpFighters(player1Character,1, player1);
-                            fightSetup.SetUpFighters(player2Character,2, player2);
+                            fightSetup.SetUpFighters(player2Character, 2, player2);
+                            player2.setPosition(100, 75);
 
                             //player2.image.flipX();
 
@@ -145,7 +154,7 @@ namespace charSelect {
         sprites.setDataNumber(player1Cursor, "PlayerNumber", 1);
         sprites.setDataBoolean(player1Cursor, "player1Ready", false); 
         player1Cursor.setStayInScreen(true);
-        tiles.placeOnTile(player1Cursor, tiles.getTileLocation(1,5))
+        tiles.placeOnTile(player1Cursor, tiles.getTileLocation(3,6))
         return player1Cursor;
     }
 
@@ -156,18 +165,14 @@ namespace charSelect {
         sprites.setDataNumber(player2Cursor, "PlayerNumber", 2);
         sprites.setDataBoolean(player2Cursor, "player2Ready", false);
         player2Cursor.setStayInScreen(true);
-        tiles.placeOnTile(player2Cursor, tiles.getTileLocation(2,5))
+        tiles.placeOnTile(player2Cursor, tiles.getTileLocation(6,6))
         return player2Cursor;
     }
 
 
     //changes a var found in main.ts which hold what character a person picked, also call what tiltle card animation should play
     export function changePlayerCharacter(playerNum: number, character: string) {
-        //the commented out code is when cursor were smoothly controlled (now they snap),
         //there was a bug with smooth controls this kinda fix it but ultimatly snaping was better experience 
-        
-        // timer.background(function () {
-            // timer.throttle("changingChar", 300, function () {
                 if (playerNum == 1 && player1Character != character) {                
                     player1Character = character;
                     sprites.setDataString(Title1, "AnimState", "Away");
@@ -179,9 +184,6 @@ namespace charSelect {
                     sprites.setDataString(Title2, "AnimState", "Away");
                     titleCardAnim(character, Title2); 
                 }
-            
-            // })
-        // })
 
     }
 
