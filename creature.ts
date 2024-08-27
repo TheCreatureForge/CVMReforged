@@ -6,10 +6,10 @@ namespace creature{
         60,         //speed
         2,          //jumnCount
         200,        //Total Energy
-        20,         //A Energy Cost
-        100,          //B-Back Energy Cost
-        75,          //B-Down Energy Cost
-        100,          //B Energy Cost
+        15,         //A Energy Cost
+        95,          //Back-B Energy Cost
+        75,          //Down-B Energy Cost
+        80,          //B Energy Cost
         350,        //character gravity
         -120,       //characterJumpSpeed
         assets.image`CreatureModel` //Image
@@ -18,7 +18,6 @@ namespace creature{
 
     export const creatureAnimations = new AnimationSetUp(
         assets.animation`CreatureWalk`, //walk
-        assets.animation`CreatureJump`,    //jump
         assets.image`CreatureStun`,    //HitStun
         assets.animation`CreatureBAnim`,//bBack
         assets.animation`CreatureShield`,// bNeutral
@@ -26,8 +25,8 @@ namespace creature{
     );
     
     const creatureAProjectile =  new projectiles.MakeProjectile(
-        7,      //Damage
-        90,     //vx
+        5,      //Damage
+        100,     //vx
         0,      //vy            
         assets.image`CreatureProj`, // Image
         0,     //applied vx
@@ -35,13 +34,13 @@ namespace creature{
     )
 
     const creatureDownBProjectile =  new projectiles.MakeProjectile(
-        20,      //Damage
+        25,      //Damage
         0,     //vx
         0,      //vy            
         assets.image`CritParticle`, // Image
         20,     //applied vx
         200,       //applied vy
-        0.5,      //scale
+        2,      //scale
         true,   //Dont Destroy On Hit
         100,     //Lifetime
         1000     //hitStun applied
@@ -72,7 +71,7 @@ namespace creature{
     export function creatureBBack(player: Sprite) {
         sprites.setDataBoolean(player, "hasShield", true);
 
-        removeEnergy(player, creatureStats.characterBBackEnergyCost);
+        removeEnergy(player, creatureStats.characterBackBEnergyCost);
         if (isPlayerFacing(player, "Right")) {
             animation.runImageAnimation(player, whichPlayerAnim(player).bBack, 200, true);
         } else {
@@ -92,25 +91,25 @@ namespace creature{
     export function creatureDownB(player: Sprite) {
         let projectile = sprites.createProjectileFromSprite(assets.image`NullImage`, player, 0, 0);
         let offset: number;
-        removeEnergy(player, creatureStats.characterBDownEnergyCost);
+        removeEnergy(player, creatureStats.characterDownBEnergyCost);
 
         if (isPlayerFacing(player, "Right")) {
             offset = 20;
-            animation.runImageAnimation(player, whichPlayerAnim(player).bDown, 70, false);
+            animation.runImageAnimation(player, whichPlayerAnim(player).bDown, 50, false);
             
         } else {
             offset = -20;
-            animation.runImageAnimation(player, whichPlayerAnim(player).bDownLeft, 70, false);
+            animation.runImageAnimation(player, whichPlayerAnim(player).bDownLeft, 50, false);
         }
 
         characterAnimations.setCharacterAnimationsEnabled(player, false)
-        timer.after(600, function () {
+        timer.after(400, function () {
             fightSetup.ApplyCharProjStats(projectile, creatureDownBProjectile, player);  
             projectile.x = player.x + offset;
             projectile.y = player.y + 16;
         })
 
-        stun(player, 900, false);
+        stun(player, 700, false);
             
         
     }
@@ -124,13 +123,14 @@ namespace creature{
         }
 
         stun(player, 1400, false);
-        player.vy -= 250;
+        player.vy -= 225;
         
         timer.after(600, function () {
             player.ay = 2000;
 
             timer.after(400, function () {
-                let projectile = sprites.createProjectileFromSprite(assets.image`NullImage`, player, 0, 0);
+                scene.cameraShake(2, 200);
+                let projectile = sprites.createProjectileFromSprite(assets.image`NullImage`.clone(), player, 0, 0);
                 animation.runImageAnimation(projectile, creatureAnimations.bNeutral, 50, false);
                 fightSetup.ApplyCharProjStats(projectile, creatureBProjectile, player); 
                 projectile.x -= 28;
@@ -140,7 +140,6 @@ namespace creature{
 
         })
 
-        //stun(player, 900, false);
     }
 
 }

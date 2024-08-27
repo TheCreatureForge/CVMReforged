@@ -17,17 +17,17 @@ function stun(player: Sprite, sec: number, disableGravity: boolean) {
         player.vx = preVx;
     }
 
-    //characterAnimations.setCharacterAnimationsEnabled(player, false)
     timer.after(sec, function () {
-        characterAnimations.setCharacterAnimationsEnabled(player, true)
+        
         if (sprites.readDataNumber(player, "playerNum") == 1) {
             controller.moveSprite(player, sprites.readDataNumber(player, "speed"), 0)
         } else {
             controller.player2.moveSprite(player, sprites.readDataNumber(player, "speed"), 0)
         }
-    
+        
         player.ay = sprites.readDataNumber(player, "characterGravity")
         sprites.setDataBoolean(player, "isStunned", false);
+        updateAnimStates();
     })
 }
 
@@ -100,4 +100,16 @@ function whichPlayerAnim(player: Sprite) {
     } else {
         return player2Animation;
     }
+}
+
+function followPlayer(projectile: Sprite, player: Sprite, speed: number, yoffset: number) {
+    game.onUpdate(function () {
+        //we be normalizing our speed in creature forge
+        let dx = player.x - projectile.x;
+        let dy = player.y - projectile.y + yoffset;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        projectile.vx = (dx / distance) * speed;
+        projectile.vy = (dy / distance) * speed;
+    });
 }

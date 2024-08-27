@@ -3,9 +3,6 @@ class AnimationSetUp  {
     public walk: Image[];
     public walkLeft: Image[];
 
-    public jump: Image[];
-    public jumpLeft: Image[];
-
     public hitStun: Image;
     public hitStunLeft: Image;
 
@@ -21,14 +18,11 @@ class AnimationSetUp  {
     
     
     
-    constructor(walk: Image[], jump: Image[], hitStun: Image, bNeutral: Image[], bBack: Image[],bDown: Image[], walkLeft?: Image[], jumpLeft?: Image[],bNeutralLeft?: Image[], bBackLeft?: Image[], bDownLeft?: Image[], hitStunLeft?: Image  ) {
+    constructor(walk: Image[], hitStun: Image, bNeutral: Image[], bBack: Image[],bDown: Image[], walkLeft?: Image[], bNeutralLeft?: Image[], bBackLeft?: Image[], bDownLeft?: Image[], hitStunLeft?: Image  ) {
         this.walk = walk;
-        this.walkLeft = walkLeft !== undefined ? walkLeft: flipImage(walk);
+        this.walkLeft = walkLeft !== undefined ? walkLeft: flipAnim(walk);
         
 
-
-        this.jump = jump;
-        this.jumpLeft = jumpLeft !== undefined ? jumpLeft: flipImage(jump);
        
 
         this.hitStun = hitStun;
@@ -41,20 +35,20 @@ class AnimationSetUp  {
 
         
         this.bNeutral = bNeutral;
-        this.bNeutralLeft = bNeutralLeft !== undefined ? bNeutralLeft : flipImage(bNeutral);
+        this.bNeutralLeft = bNeutralLeft !== undefined ? bNeutralLeft : flipAnim(bNeutral);
         
         this.bBack = bBack;
-        this.bBackLeft = bBackLeft !== undefined ? bBackLeft : flipImage(bBack);
+        this.bBackLeft = bBackLeft !== undefined ? bBackLeft : flipAnim(bBack);
 
         this.bDown = bDown;
-        this.bDownLeft = bDownLeft !== undefined ? bDownLeft : flipImage(bDown);
+        this.bDownLeft = bDownLeft !== undefined ? bDownLeft : flipAnim(bDown);
     }
 
 
     
 }
 
-function flipImage(anim: Image[]) {
+function flipAnim(anim: Image[]) {
     if (!anim || anim.length === 0) {
         return []; 
     }
@@ -71,6 +65,12 @@ function flipImage(anim: Image[]) {
     return newAnim;
 }
 
+function flipImage(img: Image) {
+    img.flipX();
+    return img;
+    
+}
+
 function reverseAnimation(anim: Image[]): Image[] {
     if (!anim || anim.length === 0) {
         return [];
@@ -83,29 +83,40 @@ function reverseAnimation(anim: Image[]): Image[] {
 
     return newAnim;
 }
-//Controls walking animation for both players
-forever(function () {
-    if (isPlayerFacing(player1, "Right")) {
-        characterAnimations.loopFrames(player1, player1Animation.walk, 100, characterAnimations.rule(Predicate.MovingRight));
-        characterAnimations.loopFrames(player1, player1Animation.walk, 100, characterAnimations.rule(Predicate.MovingLeft));
-        
-        
-    }
-    if (isPlayerFacing(player1, "Left")) {
-        characterAnimations.loopFrames(player1, player1Animation.walkLeft, 100, characterAnimations.rule(Predicate.MovingRight));
-        characterAnimations.loopFrames(player1, player1Animation.walkLeft, 100, characterAnimations.rule(Predicate.MovingLeft));
 
+
+function updateAnimStates() {
+
+    if (!sprites.readDataBoolean(player1, "isStunned")) {
+        animation.stopAnimation(animation.AnimationTypes.All, player1);
+        if (isPlayerFacing(player1, "Right") ) {
+            characterAnimations.loopFrames(player1, player1Animation.walk, 100, characterAnimations.rule(Predicate.MovingRight));
+            characterAnimations.loopFrames(player1, player1Animation.walk, 100, characterAnimations.rule(Predicate.MovingLeft));
+        }
+        
+        if (isPlayerFacing(player1, "Left")  ) {
+            characterAnimations.loopFrames(player1, player1Animation.walkLeft, 100, characterAnimations.rule(Predicate.MovingRight));
+            characterAnimations.loopFrames(player1, player1Animation.walkLeft, 100, characterAnimations.rule(Predicate.MovingLeft));
+            
+        }
+        
+        characterAnimations.setCharacterAnimationsEnabled(player1, true);
+        
     }
 
-    if (isPlayerFacing(player2, "Right")) {
-        characterAnimations.loopFrames(player2, player2Animation.walk, 100, characterAnimations.rule(Predicate.MovingRight));
-        characterAnimations.loopFrames(player2, player2Animation.walk, 100, characterAnimations.rule(Predicate.MovingLeft));
+    if (!sprites.readDataBoolean(player2, "isStunned")) {
+        animation.stopAnimation(animation.AnimationTypes.All, player2);
         
+        if (isPlayerFacing(player2, "Right")) {
+            characterAnimations.loopFrames(player2, player2Animation.walk, 100, characterAnimations.rule(Predicate.MovingRight));
+            characterAnimations.loopFrames(player2, player2Animation.walk, 100, characterAnimations.rule(Predicate.MovingLeft));
+        }
         
+        if (isPlayerFacing(player2, "Left")) {
+            characterAnimations.loopFrames(player2, player2Animation.walkLeft, 100, characterAnimations.rule(Predicate.MovingRight));
+            characterAnimations.loopFrames(player2, player2Animation.walkLeft, 100, characterAnimations.rule(Predicate.MovingLeft));
+        }
+        characterAnimations.setCharacterAnimationsEnabled(player2, true);
     }
-    if (isPlayerFacing(player2, "Left")) {
-        characterAnimations.loopFrames(player2, player2Animation.walkLeft, 100, characterAnimations.rule(Predicate.MovingRight));
-        characterAnimations.loopFrames(player2, player2Animation.walkLeft, 100, characterAnimations.rule(Predicate.MovingLeft));
 
-    }
-});
+}

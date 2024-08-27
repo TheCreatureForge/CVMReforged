@@ -97,20 +97,6 @@
         "tilemapTile": true,
         "displayName": "AmongUsTile"
     },
-    "Floor1": {
-        "id": "Floor1",
-        "data": "MTAwYTAwMDgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMjAyMDIwMjAyMDIwMjAyMDMwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMg==",
-        "dataEncoding": "base64",
-        "namespace": "myTiles.",
-        "mimeType": "application/mkcd-tilemap",
-        "displayName": "Floor",
-        "tileset": [
-            "myTiles.transparency16",
-            "sprites.builtin.forestTiles1",
-            "sprites.builtin.forestTiles2",
-            "sprites.builtin.forestTiles3"
-        ]
-    },
     "CharSelectTM1": {
         "id": "CharSelectTM1",
         "data": "MTAwYTAwMDgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMDAwMDAyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjIyMjIyMjIyMjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
@@ -122,6 +108,20 @@
             "myTiles.transparency16",
             "myTiles.tile1",
             "myTiles.tile2"
+        ]
+    },
+    "Floor1": {
+        "id": "Floor1",
+        "data": "MTAwYjAwMGEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMDIwMjAyMDIwMjAyMDIwMjAzMDAyMjIyMjIyMjIyMDIwMDAwMDAwMDIwMDAwMDAwMDAwMDAyMDAwMDAwMDAyMDAwMDAwMDAwMDAwMjAwMDAwMDAwMjAwMDAwMDAwMDAwMDIwMDAwMDAwMDIwMDAwMDAwMDAwMDIyMjIyMjIyMjIyMg==",
+        "dataEncoding": "base64",
+        "namespace": "myTiles.",
+        "mimeType": "application/mkcd-tilemap",
+        "displayName": "Floor",
+        "tileset": [
+            "myTiles.transparency16",
+            "sprites.builtin.forestTiles1",
+            "sprites.builtin.forestTiles2",
+            "sprites.builtin.forestTiles3"
         ]
     }
 }

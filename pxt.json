@@ -33,7 +33,8 @@
         "status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
         "arcade-sprite-events": "github:riknoll/arcade-sprite-events#master",
         "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
-        "button-combos": "github:jwunderl/pxt-button-combos#v0.0.24"
+        "button-combos": "github:jwunderl/pxt-button-combos#v0.0.24",
+        "extra-effects": "github:alexszeto/extra-effects#v3.1.0"
     },
     "targetVersions": {
         "branch": "v1.12.55",

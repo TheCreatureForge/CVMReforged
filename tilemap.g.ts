@@ -259,17 +259,6 @@ namespace myTiles {
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
-            case "Floor":
-            case "Floor1":return tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001020202020202020203`, img`
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-. . . . . . . . . . 
-2 2 2 2 2 2 2 2 2 2 
-`, [myTiles.transparency16,sprites.builtin.forestTiles1,sprites.builtin.forestTiles2,sprites.builtin.forestTiles3], TileScale.Sixteen);
             case "CharSelectTM":
             case "CharSelectTM1":return tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000200000000000000000000000000`, img`
 . . . . . . . . . . 
@@ -281,6 +270,19 @@ namespace myTiles {
 . . . . . . . . . . 
 . . . . . . . . . . 
 `, [myTiles.transparency16,myTiles.tile1,myTiles.tile2], TileScale.Sixteen);
+            case "Floor":
+            case "Floor1":return tiles.createTilemap(hex`0b000a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000102020202020202020300`, img`
+2 2 2 2 2 2 2 2 2 2 2 
+. . . . . . . . . . 2 
+. . . . . . . . . . 2 
+. . . . . . . . . . 2 
+. . . . . . . . . . 2 
+. . . . . . . . . . 2 
+. . . . . . . . . . 2 
+. . . . . . . . . . 2 
+. . . . . . . . . . 2 
+2 2 2 2 2 2 2 2 2 2 2 
+`, [myTiles.transparency16,sprites.builtin.forestTiles1,sprites.builtin.forestTiles2,sprites.builtin.forestTiles3], TileScale.Sixteen);
         }
         return null;
     })

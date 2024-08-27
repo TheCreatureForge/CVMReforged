@@ -79,8 +79,11 @@ function characterB(char: String, player: Sprite, energyBar: StatusBarSprite) {
     }
 }
 
-//DO NOT CHANGE BELOW IF MAKING NEW CHARACTER
-//////////////////////////////////////////////////////////////////////////////////////////////
+//DO NOT TOUCH BELOW IF MAKING NEW CHARACTER
+//DO NOT TOUCH BELOW IF MAKING NEW CHARACTER
+//DO NOT TOUCH BELOW IF MAKING NEW CHARACTER
+//DO NOT TOUCH BELOW IF MAKING NEW CHARACTER
+
 
 //Cursor Controls
 
@@ -228,43 +231,34 @@ controller.player2.onButtonEvent(ControllerButton.Up, ControllerButtonEvent.Rele
 
 
 forever(function () {
-    
-    if (sprites.readDataBoolean(player1, "isStunned") == false) {
-        if (controller.up.isPressed() && player1JumpTimeCounter > 0 && player1AmountOfJumps < sprites.readDataNumber(player1, "jumpCount")) {
-
-            if (isPlayerFacing(player1, "Right")) {
-                characterAnimations.runFrames(player1, player1Animation.jump, 20, characterAnimations.rule(Predicate.MovingUp));
-            } else {
-                characterAnimations.runFrames(player1, player1Animation.jumpLeft, 20, characterAnimations.rule(Predicate.MovingUp));
-            }
-
-            player1.vy = sprites.readDataNumber(player1, "characterJumpSpeed");
-            player1JumpTimeCounter -= Delta.RAW();
-            
-        }
-    
-        if (player1.isHittingTile(CollisionDirection.Bottom)) {
-            player1JumpTime = .1;
-            player1AmountOfJumps = 0;
-        }
-    }
-    
-    if (sprites.readDataBoolean(player2, "isStunned") == false) {
+    if (stateOfGame == "Fight") {
         
-        if (controller.player2.up.isPressed() && player2JumpTimeCounter > 0 && player2AmountOfJumps < sprites.readDataNumber(player2, "jumpCount")) {
-            if (isPlayerFacing(player2, "Right")) {
-                characterAnimations.runFrames(player2, player2Animation.jump, 20, characterAnimations.rule(Predicate.MovingUp));
-            } else {
-                characterAnimations.runFrames(player2, player2Animation.jumpLeft, 20, characterAnimations.rule(Predicate.MovingUp));
-            }
-            player2.vy = sprites.readDataNumber(player2, "characterJumpSpeed");
-            player2JumpTimeCounter -= Delta.RAW();
-            
-        }
+        if (sprites.readDataBoolean(player1, "isStunned") == false) {
+            if (controller.up.isPressed() && player1JumpTimeCounter > 0 && player1AmountOfJumps < sprites.readDataNumber(player1, "jumpCount")) {
     
-        if (player2.isHittingTile(CollisionDirection.Bottom)) {
-            player2JumpTime = .1;
-            player2AmountOfJumps = 0;
+                player1.vy = sprites.readDataNumber(player1, "characterJumpSpeed");
+                player1JumpTimeCounter -= Delta.RAW();
+                
+            }
+        
+            if (player1.isHittingTile(CollisionDirection.Bottom)) {
+                player1JumpTime = .1;
+                player1AmountOfJumps = 0;
+            }
+        }
+        
+        if (sprites.readDataBoolean(player2, "isStunned") == false) {
+            
+            if (controller.player2.up.isPressed() && player2JumpTimeCounter > 0 && player2AmountOfJumps < sprites.readDataNumber(player2, "jumpCount")) {
+                player2.vy = sprites.readDataNumber(player2, "characterJumpSpeed");
+                player2JumpTimeCounter -= Delta.RAW();
+                
+            }
+        
+            if (player2.isHittingTile(CollisionDirection.Bottom)) {
+                player2JumpTime = .1;
+                player2AmountOfJumps = 0;
+            }
         }
     }
     

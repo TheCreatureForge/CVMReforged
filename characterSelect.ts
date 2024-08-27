@@ -3,7 +3,7 @@
 namespace charSelect {
 
     
-    //add a title art to come down when cursor is hovering tile, add case for each character
+    //add a title card to come down when cursor is hovering char tile, add case for each character
     function titleCardAnim(character:string, title: Sprite) {
         if (sprites.readDataString(title, "AnimState") == "Away") {
             switch (character) {
@@ -66,7 +66,7 @@ namespace charSelect {
             stateOfGame = "Loading"
             info.stopCountdown();
             //Versus Card
-            timer.after(1000, function () {
+            timer.after(2000, function () {
                 tiles.setCurrentTilemap(tilemap`NULL`);
                 scene.setBackgroundImage(assets.image`VsBackground`)
                 Title1.setPosition(40, 9);
@@ -86,15 +86,16 @@ namespace charSelect {
                 player2.scale = 1.5;
         
                 //Set up fighting arena background
-                timer.after(1000, function () {
+                timer.after(3000, function () {
                     scene.setBackgroundImage(assets.image`Arena1Background`);
                     
-                    player1.setImage(assets.image`NullImage`)
-                    player2.setImage(assets.image`NullImage`)
+                    player1.setImage(assets.image`NullImage`);
+                    player2.setImage(assets.image`NullImage`);
 
 
-                    Title1.destroy();
-                    Title2.destroy();
+                    Title1.setImage(assets.image`NullImage`);
+                    Title2.setImage(assets.image`NullImage`);
+
                     color.startFade(color.Black, color.originalPalette, 4000);
 
                     timer.after(1000, function () {
@@ -115,19 +116,13 @@ namespace charSelect {
                         effects.blizzard.startScreenEffect(4000)
                         
                         timer.after(753, function () { 
-                            stateOfGame = "Fight"
                             scroller.scrollBackgroundWithSpeed(0, 0)
                             tiles.setCurrentTilemap(assets.tilemap`Floor`);
-
-                            fightSetup.SetUpFighters(player1Character,1, player1);
+                            fightSetup.SetUpFighters(player1Character, 1, player1);
                             fightSetup.SetUpFighters(player2Character, 2, player2);
-                            player2.setPosition(100, 75);
-
-                            //player2.image.flipX();
-
-
-                            controller.moveSprite(player1, sprites.readDataNumber(player1, "speed"),0)
-                            controller.player2.moveSprite(player2, sprites.readDataNumber(player2, "speed"),0)
+                            beginMatch();
+                            updateAnimStates();
+                            scene.centerCameraAt(0, 90) 
                         })
                     })
 
@@ -136,6 +131,48 @@ namespace charSelect {
                 })
             })
         }
+    }
+
+    statusbars.onZero(StatusBarKind.Health, function () {
+        stateOfGame = "Done"
+        controller.player1.moveSprite(player1, 0, 0);
+        controller.player2.moveSprite(player2, 0, 0);
+        
+        if (player1HealthBar.value <= 0) {
+            player2WinCount++;
+        } else {
+            player1WinCount++;
+        }
+
+        if (player1WinCount >= 2) {
+            game.setGameOverMessage(true, "P1 " + player1Character + " Wins!");
+            game.gameOver(true)
+        } else if (player2WinCount >= 2) {
+            game.setGameOverMessage(true, "P2 " + player2Character + " Wins!");
+            game.gameOver(true)
+        }
+        
+        pause(5000);
+
+        beginMatch();
+        
+
+
+    
+    })
+
+    export function beginMatch() {
+        stateOfGame = "Fight"
+
+        sprites.destroyAllSpritesOfKind(SpriteKind.Projectile);
+        fightSetup.setUpHud(player1);
+        fightSetup.setUpHud(player2);
+        
+        player2.setPosition(120, 100);
+        player1.setPosition(40, 100);
+
+        controller.moveSprite(player1, sprites.readDataNumber(player1, "speed"),0)
+        controller.player2.moveSprite(player2, sprites.readDataNumber(player2, "speed"),0)
     }
 
     //Displays character splash img when a cursor hovers a select tile, 
@@ -173,17 +210,17 @@ namespace charSelect {
     //changes a var found in main.ts which hold what character a person picked, also call what tiltle card animation should play
     export function changePlayerCharacter(playerNum: number, character: string) {
         //there was a bug with smooth controls this kinda fix it but ultimatly snaping was better experience 
-                if (playerNum == 1 && player1Character != character) {                
-                    player1Character = character;
-                    sprites.setDataString(Title1, "AnimState", "Away");
-                    titleCardAnim(character, Title1);                        
-                }
-    
-                if (playerNum == 2 && player2Character != character) {
-                    player2Character = character;
-                    sprites.setDataString(Title2, "AnimState", "Away");
-                    titleCardAnim(character, Title2); 
-                }
+        if (playerNum == 1 && player1Character != character) {                
+            player1Character = character;
+            sprites.setDataString(Title1, "AnimState", "Away");
+            titleCardAnim(character, Title1);                        
+        }
+
+        if (playerNum == 2 && player2Character != character) {
+            player2Character = character;
+            sprites.setDataString(Title2, "AnimState", "Away");
+            titleCardAnim(character, Title2); 
+        }
 
     }
 

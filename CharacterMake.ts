@@ -7,8 +7,8 @@ namespace CMakeNS {
 
         public characterEnergy: number;
         public characterAEnergyCost: number;
-        public characterBBackEnergyCost: number;
-        public characterBDownEnergyCost: number;
+        public characterBackBEnergyCost: number;
+        public characterDownBEnergyCost: number;
         public characterBEnergyCost: number;
 
         public characterGravity: number;
@@ -26,8 +26,8 @@ namespace CMakeNS {
             this.characterEnergy = characterEnergy;
 
             this.characterAEnergyCost = characterAEnergyCost;
-            this.characterBBackEnergyCost = characterBBackEnergyCost;
-            this.characterBDownEnergyCost = characterBDownEnergyCost;
+            this.characterBackBEnergyCost = characterBBackEnergyCost;
+            this.characterDownBEnergyCost = characterBDownEnergyCost;
             this.characterBEnergyCost = characterBEnergyCost;
 
             this.characterGravity = characterGravity;

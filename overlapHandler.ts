@@ -2,6 +2,7 @@
 
 
 namespace overlapHandle {
+    
     // Dont change. This picks the char based on hover sprite
     // If you need the tile that got hovered, we have tile-- if you want to add more.
     export function handleOverlap(sprite: Sprite, tile: Image, selectImg: Image, character: string) {
