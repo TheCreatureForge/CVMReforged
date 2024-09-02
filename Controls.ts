@@ -3,7 +3,7 @@
 ///<reference path="./creature.ts" />
 
 
-
+//basics attacks
 function characterAttack(player: Sprite, char: String, energyBar: StatusBarSprite) {
     let projectile = sprites.createProjectileFromSprite(assets.image`NullImage`, player, 0, 0);
 
@@ -17,16 +17,20 @@ function characterAttack(player: Sprite, char: String, energyBar: StatusBarSprit
                 case "Minion":
                     minion.minionA(projectile, player);
                     break;
+                case "Codey":
+                    codey.codeyA(projectile, player)
+                    break;
                 default:
                     projectile.destroy();
             }   
         }
 }
 
+//Back specials
 function characterBackB(char: String, player: Sprite, energyBar: StatusBarSprite ) {
     if (stateOfGame == "Fight") {
-        if (energyBar.value >= sprites.readDataNumber(player, "characterBBackEnergyCost") && sprites.readDataBoolean(player, "isStunned") == false) { 
-            
+        if (energyBar.value >= sprites.readDataNumber(player, "characterBackBEnergyCost") && sprites.readDataBoolean(player, "isStunned") == false) { 
+            removeEnergy(player, sprites.readDataNumber(player, "characterBackBEnergyCost"));
             switch (char) {
                 case "Creature":
                     creature.creatureBBack(player);
@@ -34,6 +38,9 @@ function characterBackB(char: String, player: Sprite, energyBar: StatusBarSprite
                 case "Minion":
                     minion.minionBackB(player);
                     break;
+                case "Codey":
+                    codey.codeyBackB(player);
+                    break;
                 default:
                     break;
             }   
@@ -43,16 +50,20 @@ function characterBackB(char: String, player: Sprite, energyBar: StatusBarSprite
     }
 }
 
+//Down Specials
 function characterDownB(char: String, player: Sprite, energyBar: StatusBarSprite ) {
     if (stateOfGame == "Fight") {
-        if (energyBar.value >= sprites.readDataNumber(player, "characterBDownEnergyCost") && sprites.readDataBoolean(player, "isStunned") == false) { 
-            
+        if (energyBar.value >= sprites.readDataNumber(player, "characterDownBEnergyCost") && sprites.readDataBoolean(player, "isStunned") == false) { 
+            removeEnergy(player, sprites.readDataNumber(player, "characterDownBEnergyCost"));
             switch (char) {
                 case "Creature":
                     creature.creatureDownB(player);
                     break;
                 case "Minion":
                     minion.minionDownB(player);
+                    break;
+                case "Codey":
+                    codey.codeyDownB(player)
                     break;
             }   
         }
@@ -61,10 +72,11 @@ function characterDownB(char: String, player: Sprite, energyBar: StatusBarSprite
     }
 }
 
+//Neutral Specials
 function characterB(char: String, player: Sprite, energyBar: StatusBarSprite) {
     if (stateOfGame == "Fight") {
         if (energyBar.value >= sprites.readDataNumber(player, "characterBEnergyCost") && sprites.readDataBoolean(player, "isStunned") == false) { 
-            
+            removeEnergy(player, sprites.readDataNumber(player, "characterBEnergyCost"));
             switch (char) {
                 case "Creature":
                     creature.creatureB(player);
@@ -72,12 +84,40 @@ function characterB(char: String, player: Sprite, energyBar: StatusBarSprite) {
                 case "Minion":
                     minion.minionB(player);
                     break;
+                case "Codey":
+                    codey.codeyB(player);
+                    break;
             }   
         }
          
             
     }
 }
+
+//Forwards Specials
+function characterForwardB(char: String, player: Sprite, energyBar: StatusBarSprite) {
+    if (stateOfGame == "Fight") {
+        if (energyBar.value >= sprites.readDataNumber(player, "characterForwardBEnergyCost") && sprites.readDataBoolean(player, "isStunned") == false) { 
+            removeEnergy(player, sprites.readDataNumber(player, "characterForwardBEnergyCost"));
+            switch (char) {
+                case "Creature":
+                    creature.creatureForwardB(player);
+                    break;
+                case "Minion":
+                    minion.minionFowardB(player);
+                    break;
+                case "Codey":
+                    codey.codeyB(player);
+                    break;
+            }   
+        }
+         
+            
+    }
+}
+
+
+
 
 //DO NOT TOUCH BELOW IF MAKING NEW CHARACTER
 //DO NOT TOUCH BELOW IF MAKING NEW CHARACTER
@@ -141,9 +181,13 @@ controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Press
 controller.player1.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
     
     if (controller.player1.isPressed(ControllerButton.Left) && isPlayerFacing(player1, "Right")) {
-        characterBackB(player1Character, player1, player1EnergyBar);      
+        characterBackB(player1Character, player1, player1EnergyBar);
     } else if (controller.player1.isPressed(ControllerButton.Right) && isPlayerFacing(player1, "Left")) {
         characterBackB(player1Character, player1, player1EnergyBar);
+    } else if (controller.player1.isPressed(ControllerButton.Left) && isPlayerFacing(player1, "Left")) {
+        characterForwardB(player1Character, player1, player1EnergyBar);
+    } else if (controller.player1.isPressed(ControllerButton.Right) && isPlayerFacing(player1, "Right")) {
+        characterForwardB(player1Character, player1, player1EnergyBar);
     }else if (controller.player1.isPressed(ControllerButton.Down)) {
         characterDownB(player1Character, player1, player1EnergyBar);
     } else if(controller.player1.isPressed(ControllerButton.B) && !controller.player1.isPressed(ControllerButton.Down)) {
@@ -176,6 +220,10 @@ controller.player2.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Press
         characterBackB(player2Character, player2, player2EnergyBar);      
     } else if (controller.player2.isPressed(ControllerButton.Right) && isPlayerFacing(player2, "Left")) {
         characterBackB(player2Character, player2, player2EnergyBar);
+    }else if (controller.player2.isPressed(ControllerButton.Left) && isPlayerFacing(player2, "Left")) {
+        characterForwardB(player2Character, player2, player2EnergyBar);
+    } else if (controller.player2.isPressed(ControllerButton.Right) && isPlayerFacing(player2, "Right")) {
+        characterForwardB(player2Character, player2, player2EnergyBar);
     }else if (controller.player2.isPressed(ControllerButton.Down)) {
         characterDownB(player2Character, player2, player2EnergyBar);
     } else if(controller.player2.isPressed(ControllerButton.B) && !controller.player2.isPressed(ControllerButton.Down)) {

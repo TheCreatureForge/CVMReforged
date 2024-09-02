@@ -14,11 +14,15 @@ class AnimationSetUp  {
 
     public bDown: Image[];
     public bDownLeft: Image[];
+
+    public bForward: Image[];
+    public bForwardLeft: Image[];
     
     
     
     
-    constructor(walk: Image[], hitStun: Image, bNeutral: Image[], bBack: Image[],bDown: Image[], walkLeft?: Image[], bNeutralLeft?: Image[], bBackLeft?: Image[], bDownLeft?: Image[], hitStunLeft?: Image  ) {
+    
+    constructor(walk: Image[], hitStun: Image, bNeutral: Image[], bBack: Image[],bDown: Image[],bForward: Image[], walkLeft?: Image[], bNeutralLeft?: Image[], bBackLeft?: Image[], bDownLeft?: Image[],bForwardLeft?: Image[] ,hitStunLeft?: Image  ) {
         this.walk = walk;
         this.walkLeft = walkLeft !== undefined ? walkLeft: flipAnim(walk);
         
@@ -42,6 +46,9 @@ class AnimationSetUp  {
 
         this.bDown = bDown;
         this.bDownLeft = bDownLeft !== undefined ? bDownLeft : flipAnim(bDown);
+
+        this.bForward = bForward;
+        this.bForwardLeft = bForwardLeft !== undefined ? bForwardLeft : flipAnim(bForward);
     }
 
 

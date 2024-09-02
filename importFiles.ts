@@ -4,3 +4,4 @@
 ///<reference path="./setUpFighters.ts" />
 ///<reference path="./Controls.ts" />
 ///<reference path="./projectiles.ts" />
+///<reference path="./codey.ts" />

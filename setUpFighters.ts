@@ -17,10 +17,12 @@ namespace fightSetup {
                     creature.creatureAnimations.bNeutral,
                     creature.creatureAnimations.bBack,
                     creature.creatureAnimations.bDown,
+                    creature.creatureAnimations.bForward,
                     creature.creatureAnimations.walkLeft,
                     creature.creatureAnimations.bNeutralLeft,
                     creature.creatureAnimations.bBackLeft,
                     creature.creatureAnimations.bDownLeft,
+                    creature.creatureAnimations.bForwardLeft,
                     creature.creatureAnimations.hitStunLeft
                 )
                 break;
@@ -32,13 +34,34 @@ namespace fightSetup {
                     minion.minionAnimations.bNeutral,
                     minion.minionAnimations.bBack,
                     minion.minionAnimations.bDown,
+                    minion.minionAnimations.bForward,
                     minion.minionAnimations.walkLeft,
                     minion.minionAnimations.bNeutralLeft,
                     minion.minionAnimations.bBackLeft,
                     minion.minionAnimations.bDownLeft,
+                    minion.minionAnimations.bForwardLeft,
                     minion.minionAnimations.hitStunLeft
                 )
                 break;
+            case "Codey":
+                
+                ApplyCharStats(sprite, codey.codeyStats, dir);
+                ani = new AnimationSetUp(
+                    codey.codeyAnimations.walk,
+                    codey.codeyAnimations.hitStun,
+                    codey.codeyAnimations.bNeutral,
+                    codey.codeyAnimations.bBack,
+                    codey.codeyAnimations.bDown,
+                    codey.codeyAnimations.bForward,
+                    codey.codeyAnimations.walkLeft,
+                    codey.codeyAnimations.bNeutralLeft,
+                    codey.codeyAnimations.bBackLeft,
+                    codey.codeyAnimations.bDownLeft,
+                    codey.codeyAnimations.bForwardLeft,
+                    codey.codeyAnimations.hitStunLeft
+                )
+
+
         }
 
         if (playerNum == 1) {
@@ -106,7 +129,6 @@ namespace fightSetup {
             player1EnergyBar.setPosition(15, 11);
             player1EnergyBar.z = -4;
             
-            
         } else {
             player2HealthBar = statusbars.create(50, 5, StatusBarKind.Health);
             player2HealthBar.max = playerHp;
@@ -115,7 +137,6 @@ namespace fightSetup {
             player2HealthBar.setStatusBarFlag(StatusBarFlag.InvertFillDirection, true);
             player2HealthBar.z = -4;
             
-
             player2EnergyBar = statusbars.create(30, 4, StatusBarKind.Energy);
             player2EnergyBar.max = playerEnergy
             player2EnergyBar.value = playerEnergy
@@ -142,14 +163,10 @@ namespace fightSetup {
         sprites.setDataNumber(proj, "damage", projStats.damage);
         sprites.setDataNumber(proj, "ownersPlayerNum", sprites.readDataNumber(projOwner, "playerNum"));
         sprites.setDataBoolean(proj, "dontDestroyOnHit", projStats.dontDestroyOnHit);
-        
         sprites.setDataNumber(proj, "applyVx", projStats.appliedVx);
         sprites.setDataNumber(proj, "applyVy", projStats.appliedVy);
         sprites.setDataNumber(proj, "applyHitStun", projStats.appliedHitStun);
-
-
-        
-
+        sprites.setDataBoolean(proj, "hasHitAlready", false);
 
     }
 
@@ -157,24 +174,19 @@ namespace fightSetup {
         sprites.setDataNumber(sprite, "hp", char.hp);
         sprites.setDataNumber(sprite, "speed", char.speed);
         sprites.setDataNumber(sprite, "jumpCount", char.jumpCount);
-        
-        sprites.setDataNumber(sprite, "characterGravity", char.characterGravity);
         sprites.setDataNumber(sprite, "characterEnergy", char.characterEnergy);
         sprites.setDataNumber(sprite, "characterAEnergy", char.characterAEnergyCost);
-        sprites.setDataNumber(sprite, "characterBBackEnergyCost", char.characterBackBEnergyCost);
-        sprites.setDataNumber(sprite, "characterBDownEnergyCost", char.characterDownBEnergyCost);
+        sprites.setDataNumber(sprite, "characterBackBEnergyCost", char.characterBackBEnergyCost);
+        sprites.setDataNumber(sprite, "characterDownBEnergyCost", char.characterDownBEnergyCost);
         sprites.setDataNumber(sprite, "characterBEnergyCost", char.characterBEnergyCost);
-
-
+        sprites.setDataNumber(sprite, "characterForwardBEnergyCost", char.characterForwardBEnergyCost);
+        sprites.setDataNumber(sprite, "characterGravity", char.characterGravity);
         sprites.setDataBoolean(sprite, "isStunned", false);
+        sprites.setDataNumber(sprite, "characterJumpSpeed", char.characterJumpSpeed);
+        sprites.setDataString(sprite,"direction", direction)
         
         sprite.ay = char.characterGravity;
         sprite.fx = 10;
-
-        
-        sprites.setDataNumber(sprite, "characterJumpSpeed", char.characterJumpSpeed);
-        sprites.setDataString(sprite,"direction", direction)
-
         sprite.setImage(char.image.clone());
     }
 

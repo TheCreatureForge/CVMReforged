@@ -1,0 +1,191 @@
+Welcome Forgers!
+
+Want to make a characacter but dont know how? Then follow along and we can make the op characacter you dreamed of!
+You should have a theme and gameplay kit for character before I suggest coding them. 
+
+Script that you'll work in:
+-overlapHandler.ts (once)
+-pxt.json (once)
+-characterSelected (once)
+-[yourCharacter].ts
+-Controls.ts
+-SetUpFighters.ts(once)
+
+
+
+
+WHAT TO DO FIRST
+-----------------------------------
+1.Make a custom tile and then add it to the `CharSelectTM` found under TILESMAPS.
+
+2.Make a selectImg of the character, some are already created for pre-existing characters (REMEMBER for art assest always capitalize the first letter, ex. CodeySelectImg)
+
+3.Go to the script overlapHandler, then the function setupOverlapHandlers. Here you will add the Overlap handler for the tiles.
+  This make it so the splash screen pop up and MOST importantly lets the game know which character they selected.
+
+4.A title card is needed when the characacter is hovered. Make a title card animation, there are some already created for characters from the previous games,
+ so make sure you check before creating a new one. After go to characterSelected and add a case statement.
+
+5.You will now add your character script the game. Go to the explorer and add a TypeScript page. The name should be [yourCharacter].ts
+  This is where most of the work is done. DO NOT FORGET to add the new page to the pxt.json - files or it WILL NOT load.
+
+After this stage you should be able to see your char, highlight and see the splash art and title anim. If not msg me on discord
+
+
+
+MEAT AND POTATOES
+-----------------------------------
+I would highly suggest having the Creatue.ts script open as reference for this part.
+
+1.In you char's script we will now add a namespace, charcters name all lowercase
+
+2.Now we add the stats, example below. Make the default art for the char and name it [YourCharacter]Model. This is the in-game idle art.  A character modle is needed.  
+
+export const [yourCharacter]Stats =  new CMakeNS.selectChar(
+        200,        //hp
+        60,         //speed
+        2,          //jumnCount
+        200,        //Total Energy
+        15,         //A Energy Cost
+        95,          //Back-B Energy Cost
+        75,          //Down-B Energy Cost
+        80,          //Forward-B Energy Cost
+        20,          //B Energy Cost
+        350,        //character gravity
+        -120,       //characterJumpSpeed
+        assets.image`[defaultCharImage]` //Image, ex. assets.image`CreatureModel`
+    )
+
+3.Animation are next, for now you can have them as null then add them as you go along. example below
+
+ export const [yourCharacter]Animations = new AnimationSetUp(
+        assets.animation`[yourCharacter]WalkAnim`, //walk
+        assets.image`[yourCharacter]Stun`,    //HitStun *THIS IS A IMAGE
+        assets.animation`[yourCharacter]BAnim`,//NeutralB
+        assets.animation`[yourCharacter]BackBAnim`,// BackB
+        assets.animation`[yourCharacter]DownBAnim`,//bDown
+        null,//bForward
+    );
+
+4.IMPORTANT||||| Go to SetUpFighters.ts, in the first function you will add a case statement. Here is how the game make the fighters. We will provide it with
+a ApplyCharStats(sprite, theCharStats you just made, dir), and animations. Yes you must write each animation line or the game will crash.
+
+5. Now we should add the move function, you will need:
+-[yourCharacter]A
+-[yourCharacter]B
+-[yourCharacter]BackB
+-[yourCharacter]ForwardB
+-[yourCharacter]DownB
+
+This should have export infront and take a sprite as a parameter ex. export function creatureB(player: Sprite) 
+
+6. In Controls.ts we'll now add the newly added function in the case statements 
+
+After you should be able to play as your characacter without the moves
+
+
+
+
+
+FUN PART
+------------------------------
+I have no idea what your character will be and their moves so I will just give some code tidbits:
+
+Go to helper.ts, this is where misc functions go, but that doesn't mean their not helpful. Take a look
+
+Here are the sprite data associated with the different sprite kinds
+
+    Characters:
+        Number  "hp"
+        Number "speed"
+        Number "jumpCount"
+        Number "characterEnergy"
+        Number  "characterAEnergy"
+        Number  "characterBackBEnergyCost"
+        Number "characterDownBEnergyCost"
+        Number "characterBEnergyCost"
+        Number "characterForwardBEnergyCost"
+        Number "characterGravity"
+        Boolean "isStunned"
+        Number "characterJumpSpeed"
+        String "direction"
+
+
+    Projectiles:
+        Number  "damage"
+        Number  "ownersPlayerNum"
+        Boolean "dontDestroyOnHit"
+        Number  "applyVx"
+        Number  "applyVy"
+        Number  "applyHitStun"
+        Boolean "hasHitAlready" 
+
+
+
+Projectiles are the tf2coconut.jpeg of this game so here is how to make them:
+    They have stats that we must make, here is a ex.
+
+     const [yourCharacter]Projectile =  new projectiles.MakeProjectile(
+        5,      //Damage
+        100,     //vx
+        0,      //vy            
+        assets.image`[yourCharacter]Proj`, // Image
+        0,     //applied vx
+        0       //applied vy
+    )
+
+    if you want MORE option you can use this constructor, 
+
+     const [yourCharacter]DownBProjectile =  new projectiles.MakeProjectile(
+        25,      //Damage
+        0,     //vx
+        0,      //vy            
+        assets.image`CritParticle`, // Image
+        20,     //applied vx
+        200,       //applied vy
+        1,      //scale
+        true,   //Dont Destroy On Hit
+        100,     //Lifetime
+        1000     //hitStun applied
+    )
+
+
+    Code-wise this is what the usual code should look like,
+
+    let proj = sprites.createProjectileFromSprite(assets.image`NullImage`, player, 0, 0);
+    fightSetup.ApplyCharProjStats(proj, creatureBProj, player); // this will apply the image from the stats as well
+
+
+Hitbox are like projectile but are hidden.
+They are created like a projectile so they need stats,
+
+const creatureForwardBSpikeHitbox =  new projectiles.MakeProjectile(
+    5,      //Damage
+    0,     //vx
+    0,      //vy            
+    assets.image`HitBox`, // Image *****IT MUST BE assets.image`HitBox`
+    0,     //applied vx
+    -100,       //applied vy
+    1,      //scale
+    false,   //Dont Destroy On Hit
+    250,     //Lifetime
+    300     //hitStun applied
+)
+
+code-wise this is what the usual code should look like,
+
+let proj = sprites.createProjectileFromSprite(assets.image`NullImage`, player, 0, 0);
+fightSetup.ApplyCharProjStats(proj, creatureForwardBSpikeHitbox, player)
+projectiles.MakeHitBox(
+    proj, //projectile to tranform into hitbox
+    0, // xpos from PLAYER
+    -20, //ypos from PLAYER
+    10, //ScaleX
+    10, //ScaleY
+    player // optional, used if you want the hit box to follow a sprite
+); 
+
+If you want to see hitBoxes go to main.ts and set showHitBoxes: boolean = true;
+
+
+

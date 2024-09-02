@@ -15,6 +15,7 @@ namespace minion{
         10,         //A Energy Cost
         50,          //B-Back Energy Cost
         100,          //B-Down Energy Cost
+        50,          //ForwardB Energy Cost
         30,          //B Energy Cost
         350,        //character gravity
         -130,       //characterJumpSpeed
@@ -27,6 +28,7 @@ namespace minion{
         assets.animation`MinionB`,// bNeutral
         assets.animation`MinionBackB`,//bBack
         assets.animation`MinionDownB`,//bDown
+        assets.animation`MinionForwardB`,//bForward
     );
 
     const minionAProjectile = new projectiles.MakeProjectile(
@@ -65,6 +67,19 @@ namespace minion{
         2000     //hitStun applied
     )
 
+    const minionForwardBHitBox =  new projectiles.MakeProjectile(
+        10,      //Damage
+        0,     //vx
+        0,      //vy            
+        assets.image`HitBox`, // Image
+        50,     //applied vx
+        30,       //applied vy
+        1,      //scale
+        false,   //Dont Destroy On Hit
+        500,     //Lifetime
+        600     //hitStun applied
+    )
+
     const minionBHomingProjectile =  new projectiles.MakeProjectile(
         5,      //Damage
         0,     //vx
@@ -74,7 +89,7 @@ namespace minion{
         0,       //applied vy
         1,      //scale
         false,   //Dont Destroy On Hit
-        4000,     //Lifetime
+        5000,     //Lifetime
         0     //hitStun applied
     )
 
@@ -89,7 +104,6 @@ namespace minion{
         let amountOfProjectile: number = 0;
         let offset: number;
 
-        removeEnergy(player, minionStats.characterBEnergyCost);
         for (let value of sprites.allOfKind(SpriteKind.Projectile)) {
             if (sprites.readDataNumber(value, "ownersPlayerNum") == sprites.readDataNumber(player, "playerNum")) {
                 value.vx = 0;
@@ -140,7 +154,7 @@ namespace minion{
 
         for (let value of sprites.allOfKind(SpriteKind.Projectile)) {
             if (sprites.readDataNumber(value, "ownersPlayerNum") == sprites.readDataNumber(player, "playerNum")) {
-                value.scale = 3;
+                value.scale = 4;
                 animation.runImageAnimation(value, assets.animation`mExplosion`, 30, false);
                 timer.after(1200, function () {             
                     sprites.destroy(value);
@@ -154,7 +168,6 @@ namespace minion{
 
 
     export function minionBackB(player: Sprite) {
-        removeEnergy(player, minionStats.characterBackBEnergyCost);
         let MCP: number;
 
         if (getPlayerNum(player) == 1) {
@@ -253,9 +266,6 @@ namespace minion{
         if (!player.isHittingTile(CollisionDirection.Bottom)) {
             return;
         }
-
-        removeEnergy(player, minionStats.characterDownBEnergyCost);
-
         //stop them from moving and using move
         player.vx = 0;
         stun(player, 2700, false);
@@ -298,4 +308,27 @@ namespace minion{
         
 
     }
+
+    export function minionFowardB(player: Sprite) {
+        stun(player, 500, false);
+        player.vx = 0;
+        if (isPlayerFacing(player, "Right")) {
+            animation.runImageAnimation(player, whichPlayerAnim(player).bForward, 50, false);
+            
+        } else {
+            animation.runImageAnimation(player, whichPlayerAnim(player).bForwardLeft, 50, false);
+        }   
+
+        let proj = sprites.createProjectileFromSprite(assets.image`HitBox`, player, 0, 0);
+        fightSetup.ApplyCharProjStats(proj, minionForwardBHitBox, player);
+        projectiles.MakeHitBox(
+            proj,
+            15,
+            -10,
+            10,
+            0
+        );
+    }
+
+    
 }

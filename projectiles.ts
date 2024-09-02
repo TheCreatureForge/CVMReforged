@@ -32,12 +32,42 @@ namespace projectiles {
            
         }
 
+
       
 
        
     }
 
+    export function MakeHitBox(proj: Sprite, xPos: number, yPos: number, scaleX: number, scaleY: number, attacheBoxToSprite?: Sprite) {
+        if (sprites.readDataNumber(proj, "ownersPlayerNum") == 1) {
+            if (isPlayerFacing(player1, "Right")) {
+                proj.x += xPos; 
+            } else {
+                proj.x -= xPos; 
+            }
+        } else {
+            if (isPlayerFacing(player2, "Right")) {
+                proj.x += xPos; 
+            } else {
+                proj.x -= xPos; 
+            }
+        }
 
+        proj.y -= yPos;
+
+       if (!showHitBoxes) {
+            proj.z = -20;
+        }
+
+        scaling.scaleByPixels(proj, scaleX, ScaleDirection.Horizontally, ScaleAnchor.Middle);      
+        scaling.scaleByPixels(proj, scaleY, ScaleDirection.Vertically, ScaleAnchor.Middle);  
+        if (attacheBoxToSprite != null) {
+            followPlayer(proj, attacheBoxToSprite,250, -yPos + 15)
+        }
+
+
+
+    }
 
 
 

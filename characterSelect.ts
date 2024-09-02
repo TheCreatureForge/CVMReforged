@@ -118,6 +118,10 @@ namespace charSelect {
                         timer.after(753, function () { 
                             scroller.scrollBackgroundWithSpeed(0, 0)
                             tiles.setCurrentTilemap(assets.tilemap`Floor`);
+                            let background = sprites.create(assets.image`Background1`, SpriteKind.Prop)
+                            background.z = -10;
+                            background.y = 100;
+
                             fightSetup.SetUpFighters(player1Character, 1, player1);
                             fightSetup.SetUpFighters(player2Character, 2, player2);
                             beginMatch();

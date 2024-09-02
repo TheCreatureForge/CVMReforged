@@ -9,6 +9,7 @@ namespace CMakeNS {
         public characterAEnergyCost: number;
         public characterBackBEnergyCost: number;
         public characterDownBEnergyCost: number;
+        public characterForwardBEnergyCost: number;
         public characterBEnergyCost: number;
 
         public characterGravity: number;
@@ -19,7 +20,7 @@ namespace CMakeNS {
         public winAnim: Image[];
         
         
-        constructor(hp: number, speed: number, jumpCount: number,characterEnergy: number, characterAEnergyCost: number, characterBBackEnergyCost: number, characterBDownEnergyCost: number,characterBEnergyCost: number, characterGravity: number, characterJumpSpeed: number, image: Image ) {
+        constructor(hp: number, speed: number, jumpCount: number,characterEnergy: number, characterAEnergyCost: number, characterBBackEnergyCost: number, characterBDownEnergyCost: number,characterForwardBEnergyCost: number,characterBEnergyCost: number, characterGravity: number, characterJumpSpeed: number, image: Image ) {
             this.hp = hp;
             this.speed = speed;
             this.jumpCount = jumpCount;
@@ -29,12 +30,11 @@ namespace CMakeNS {
             this.characterBackBEnergyCost = characterBBackEnergyCost;
             this.characterDownBEnergyCost = characterBDownEnergyCost;
             this.characterBEnergyCost = characterBEnergyCost;
+            this.characterForwardBEnergyCost = characterForwardBEnergyCost;
 
             this.characterGravity = characterGravity;
             this.characterJumpSpeed = characterJumpSpeed;
             this.image = image;
-            //this.deathAnim = image;
-            //this.winAnim = image;
         }
 
        
